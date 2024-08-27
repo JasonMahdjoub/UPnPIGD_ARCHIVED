@@ -35,6 +35,8 @@ import org.testng.annotations.Test;
 
 import java.net.InetAddress;
 import java.net.URI;
+import java.util.function.Function;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static org.testng.Assert.*;
@@ -83,6 +85,7 @@ abstract public class StreamServerClientTest {
 
     public StreamServer<?> server;
     public StreamClient<?> client;
+    public static long clientTimeoutMillis;
     public TestProtocol lastExecutedServerProtocol;
 
 
@@ -93,6 +96,17 @@ abstract public class StreamServerClientTest {
         configuration.getStreamServerExecutorService().execute(server);
 
         client = createStreamClient(configuration);
+        Thread.sleep(1000);
+    }
+
+    public void start(Function<Integer, StreamServer<?>> createServer,
+                      Function<UpnpServiceConfiguration, StreamClient<?>> createClient) throws Exception {
+        server = createServer.apply(TEST_PORT);
+        server.init(InetAddress.getByName(TEST_HOST), router, configuration.createNetworkAddressFactory());
+        configuration.getStreamServerExecutorService().execute(server);
+
+        client = createClient.apply(configuration);
+        clientTimeoutMillis = 1000L * client.getConfiguration().getTimeoutSeconds();
         Thread.sleep(1000);
     }
 
@@ -291,6 +305,7 @@ abstract public class StreamServerClientTest {
     public static class DelayedResponse extends TestProtocol {
 
         public static final String PATH = "/delayed";
+        public static final long SLEEP_MS = clientTimeoutMillis + 1000;
 
         public DelayedResponse(StreamRequestMessage inputMessage) {
             super(inputMessage);
@@ -299,8 +314,9 @@ abstract public class StreamServerClientTest {
         @Override
         protected StreamResponseMessage executeSync() {
             try {
-                log.info("Sleeping for 2 seconds before completion...");
-                Thread.sleep(2000);
+                if (log.isLoggable(Level.INFO))
+                    log.info("Sleeping for 2 seconds before completion..."+SLEEP_MS);
+                Thread.sleep(SLEEP_MS);
             } catch (InterruptedException ex) {
                 throw new RuntimeException(ex);
             }
@@ -312,6 +328,7 @@ abstract public class StreamServerClientTest {
     public static class TooLongResponse extends TestProtocol {
 
         public static final String PATH = "/toolong";
+        public static final long SLEEP_MS = clientTimeoutMillis + 1000;
 
         public TooLongResponse(StreamRequestMessage inputMessage) {
             super(inputMessage);
@@ -320,8 +337,9 @@ abstract public class StreamServerClientTest {
         @Override
         protected StreamResponseMessage executeSync() {
             try {
-                log.info("Sleeping for 4 seconds before completion...");
-                Thread.sleep(4000);
+                if (log.isLoggable(Level.INFO))
+                    log.info("Sleeping for 4 seconds before completion..."+SLEEP_MS);
+                Thread.sleep(SLEEP_MS);
             } catch (InterruptedException ex) {
                 throw new RuntimeException(ex);
             }

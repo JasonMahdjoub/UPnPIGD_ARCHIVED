@@ -26,6 +26,8 @@ import com.distrimind.upnp_igd.model.message.UpnpHeaders;
 import com.distrimind.upnp_igd.model.meta.RemoteDeviceIdentity;
 import com.distrimind.upnp_igd.model.meta.RemoteService;
 import com.distrimind.upnp_igd.model.types.ServiceType;
+import com.distrimind.upnp_igd.transport.TransportConfiguration;
+import com.distrimind.upnp_igd.transport.TransportConfigurationProvider;
 import com.distrimind.upnp_igd.transport.impl.DatagramIOConfigurationImpl;
 import com.distrimind.upnp_igd.transport.impl.DatagramIOImpl;
 import com.distrimind.upnp_igd.transport.impl.DatagramProcessorImpl;
@@ -35,20 +37,11 @@ import com.distrimind.upnp_igd.transport.impl.MulticastReceiverImpl;
 import com.distrimind.upnp_igd.transport.impl.NetworkAddressFactoryImpl;
 import com.distrimind.upnp_igd.transport.impl.SOAPActionProcessorImpl;
 import com.distrimind.upnp_igd.transport.impl.StreamClientConfigurationImpl;
-import com.distrimind.upnp_igd.transport.impl.StreamClientImpl;
-import com.distrimind.upnp_igd.transport.impl.StreamServerConfigurationImpl;
-import com.distrimind.upnp_igd.transport.impl.StreamServerImpl;
 import com.distrimind.upnp_igd.transport.spi.*;
 import com.distrimind.upnp_igd.util.Exceptions;
 import jakarta.enterprise.inject.Alternative;
 
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.RejectedExecutionHandler;
-import java.util.concurrent.SynchronousQueue;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -83,6 +76,17 @@ public class DefaultUpnpServiceConfiguration implements UpnpServiceConfiguration
 
     private static final Logger log = Logger.getLogger(DefaultUpnpServiceConfiguration.class.getName());
 
+    // set a fairly large core threadpool size, expecting that core timeout policy will
+    // allow the pool to reduce in size after inactivity. note that ThreadPoolExecutor
+    // only adds threads beyond its core size once the backlog is full, so a low value
+    // core size is a poor choice when there are lots of long-running + idle jobs.
+    // a brief intro to the issue:
+    // http://www.bigsoft.co.uk/blog/2009/11/27/rules-of-a-threadpoolexecutor-pool-size
+    private static final int CORE_THREAD_POOL_SIZE = 16;
+    private static final int THREAD_POOL_SIZE = 200;
+    private static final int THREAD_QUEUE_SIZE = 1000;
+    private static final boolean THREAD_POOL_CORE_TIMEOUT = true;
+
     final private int streamListenPort;
 
     final private ExecutorService defaultExecutorService;
@@ -95,8 +99,10 @@ public class DefaultUpnpServiceConfiguration implements UpnpServiceConfiguration
     final private ServiceDescriptorBinder serviceDescriptorBinderUDA10;
 
     final private Namespace namespace;
+    private final StreamClientConfiguration configuration;
     final private int multicastPort;
     private NetworkAddressFactory networkAddressFactory;
+    private final TransportConfiguration<?, ?> transportConfiguration;
 
     /**
      * Defaults to port '0', ephemeral.
@@ -130,7 +136,9 @@ public class DefaultUpnpServiceConfiguration implements UpnpServiceConfiguration
         serviceDescriptorBinderUDA10 = createServiceDescriptorBinderUDA10();
 
         namespace = createNamespace();
+        configuration = new StreamClientConfigurationImpl(defaultExecutorService);
         networkAddressFactory=null;
+        transportConfiguration = TransportConfigurationProvider.getDefaultTransportConfiguration();
     }
 
     @Override
@@ -154,11 +162,7 @@ public class DefaultUpnpServiceConfiguration implements UpnpServiceConfiguration
 
     @Override
     public StreamClient<?> createStreamClient() {
-        return new StreamClientImpl(
-            new StreamClientConfigurationImpl(
-                getSyncProtocolExecutorService()
-            )
-        );
+        return transportConfiguration.createStreamClient(getSyncProtocolExecutorService(), configuration);
     }
 
     @Override
@@ -178,11 +182,7 @@ public class DefaultUpnpServiceConfiguration implements UpnpServiceConfiguration
 
     @Override
     public StreamServer<?> createStreamServer(NetworkAddressFactory networkAddressFactory) {
-        return new StreamServerImpl(
-                new StreamServerConfigurationImpl(
-                        networkAddressFactory.getStreamListenPort()
-                )
-        );
+        return transportConfiguration.createStreamServer(networkAddressFactory.getStreamListenPort());
     }
 
     @Override
@@ -336,30 +336,23 @@ public class DefaultUpnpServiceConfiguration implements UpnpServiceConfiguration
     public static class ClingExecutor extends ThreadPoolExecutor {
 
         public ClingExecutor() {
-            this(new ClingThreadFactory(),
-                 new ThreadPoolExecutor.DiscardPolicy() {
-                     // The pool is unbounded but rejections will happen during shutdown
-                     @Override
-                     public void rejectedExecution(Runnable runnable, ThreadPoolExecutor threadPoolExecutor) {
-                         // Log and discard
-                         if (log.isLoggable(Level.INFO))
-                            log.info("Thread pool rejected execution of " + runnable.getClass());
-                         super.rejectedExecution(runnable, threadPoolExecutor);
-                     }
-                 }
-            );
+            this(new ClingThreadFactory(), new ThreadPoolExecutor.DiscardPolicy() {
+                // The pool is bounded and rejections will happen during shutdown
+                @Override
+                public void rejectedExecution(Runnable runnable, ThreadPoolExecutor threadPoolExecutor) {
+                    // Log and discard
+                    if (log.isLoggable(Level.INFO))
+                        log.info("Thread pool rejected execution of " + runnable.getClass());
+                    super.rejectedExecution(runnable, threadPoolExecutor);
+                }
+            });
         }
 
         public ClingExecutor(ThreadFactory threadFactory, RejectedExecutionHandler rejectedHandler) {
             // This is the same as Executors.newCachedThreadPool
-            super(0,
-                  Integer.MAX_VALUE,
-                  60L,
-                  TimeUnit.SECONDS,
-					new SynchronousQueue<>(),
-                  threadFactory,
-                  rejectedHandler
-            );
+            super(CORE_THREAD_POOL_SIZE, THREAD_POOL_SIZE, 10L, TimeUnit.SECONDS,
+                    new ArrayBlockingQueue<>(THREAD_QUEUE_SIZE), threadFactory, rejectedHandler);
+            allowCoreThreadTimeOut(THREAD_POOL_CORE_TIMEOUT);
         }
 
         @Override
