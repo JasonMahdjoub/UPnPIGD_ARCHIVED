@@ -16,7 +16,7 @@ package com.distrimind.upnp_igd.android.test.transport;
 
 import com.distrimind.upnp_igd.UpnpServiceConfiguration;
 import com.distrimind.upnp_igd.android.transport.impl.jetty.StreamClientConfigurationImpl;
-import com.distrimind.upnp_igd.android.transport.impl.jetty.StreamClientImpl;
+import com.distrimind.upnp_igd.android.transport.impl.jetty.JettyStreamClientImpl;
 import com.distrimind.upnp_igd.transport.spi.StreamClient;
 
 /**
@@ -26,7 +26,7 @@ public class JettyServerJDKClientTest extends JettyServerJettyClientTest {
 
     @Override
     public StreamClient<?> createStreamClient(UpnpServiceConfiguration configuration) {
-        return new StreamClientImpl(
+        return new JettyStreamClientImpl(
             new StreamClientConfigurationImpl(
                 configuration.getSyncProtocolExecutorService(),
                 3

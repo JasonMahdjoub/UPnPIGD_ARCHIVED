@@ -21,7 +21,7 @@ import com.distrimind.upnp_igd.android.transport.impl.AsyncServletStreamServerCo
 import com.distrimind.upnp_igd.android.transport.impl.AsyncServletStreamServerImpl;
 import com.distrimind.upnp_igd.android.transport.impl.jetty.JettyServletContainer;
 import com.distrimind.upnp_igd.android.transport.impl.jetty.StreamClientConfigurationImpl;
-import com.distrimind.upnp_igd.android.transport.impl.jetty.StreamClientImpl;
+import com.distrimind.upnp_igd.android.transport.impl.jetty.JettyStreamClientImpl;
 import com.distrimind.upnp_igd.binding.xml.DeviceDescriptorBinder;
 import com.distrimind.upnp_igd.binding.xml.RecoveringUDA10DeviceDescriptorBinderImpl;
 import com.distrimind.upnp_igd.binding.xml.ServiceDescriptorBinder;
@@ -87,7 +87,7 @@ public class AndroidUpnpServiceConfiguration extends DefaultUpnpServiceConfigura
     @Override
     public StreamClient<?> createStreamClient() {
         // Use Jetty
-        return new StreamClientImpl(
+        return new JettyStreamClientImpl(
             new StreamClientConfigurationImpl(
                 getSyncProtocolExecutorService()
             ) {

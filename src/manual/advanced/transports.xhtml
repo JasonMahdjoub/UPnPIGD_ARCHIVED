@@ -27,7 +27,7 @@
                 implementation. Note that this implementation does <em>NOT WORK</em> on Android, the
                 <code>URLStreamHandlerFactory</code> can't be patched on Android!
             </dd>
-            <dt><code>com.distrimind.upnp_igd.android.transport.impl.jetty.StreamClientImpl</code></dt>
+            <dt><code>com.distrimind.upnp_igd.android.transport.impl.jetty.JettyStreamClientImpl</code></dt>
             <dd>
                 This implementation is based on the <em>Jetty 8</em> HTTP client, you need the artifact
                 <code>org.eclipse.jetty:jetty-client:8.1</code> on your classpath to use it. This implementation works
@@ -76,7 +76,7 @@ public class MyUpnpServiceConfiguration extends DefaultUpnpServiceConfiguration 
 
     @Override
     public StreamClient createStreamClient() {
-        return new com.distrimind.upnp_igd.android.transport.impl.jetty.StreamClientImpl(
+        return new com.distrimind.upnp_igd.android.transport.impl.jetty.JettyStreamClientImpl(
             new com.distrimind.upnp_igd.android.transport.impl.jetty.StreamClientConfigurationImpl(
                 getSyncProtocolExecutor()
             )

@@ -15,6 +15,7 @@
 
 package com.distrimind.upnp_igd.protocol.async;
 
+import com.distrimind.upnp_igd.UpnpServiceConfiguration;
 import com.distrimind.upnp_igd.protocol.ReceivingAsync;
 import com.distrimind.upnp_igd.protocol.RetrieveRemoteDescriptors;
 import com.distrimind.upnp_igd.transport.RouterException;
@@ -28,6 +29,7 @@ import com.distrimind.upnp_igd.model.meta.RemoteDevice;
 import com.distrimind.upnp_igd.model.meta.RemoteDeviceIdentity;
 import com.distrimind.upnp_igd.model.types.UDN;
 
+import java.util.concurrent.Executor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -104,11 +106,13 @@ public class ReceivingSearchResponse extends ReceivingAsync<IncomingSearchRespon
 			return;
         }
 
-        // Unfortunately, we always have to retrieve the descriptor because at this point we
-        // have no idea if it's a root or embedded device
-        getUpnpService().getConfiguration().getAsyncProtocolExecutor().execute(
-                new RetrieveRemoteDescriptors(getUpnpService(), rd)
-        );
+		UpnpServiceConfiguration conf = getUpnpService().getConfiguration();
+		if (conf != null) {
+			Executor executor = conf.getAsyncProtocolExecutor();
+			if (executor != null) {
+				executor.execute(new RetrieveRemoteDescriptors(getUpnpService(), rd));
+			}
+		}
 
     }
 

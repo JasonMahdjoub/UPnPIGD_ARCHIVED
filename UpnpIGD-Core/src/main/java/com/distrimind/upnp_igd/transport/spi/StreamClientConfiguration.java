@@ -54,4 +54,13 @@ public interface StreamClientConfiguration {
      */
 	String getUserAgentValue(int majorVersion, int minorVersion);
 
+	/**
+	 * @return A request will not be executed again if it has failed in the last X seconds ({@code 0} to disable)
+	 */
+	int getRetryAfterSeconds();
+
+	/**
+	 * @return Configured value or default of 5 retries.
+	 */
+	int getRetryIterations();
 }

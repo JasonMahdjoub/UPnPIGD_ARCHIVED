@@ -40,5 +40,12 @@ public class StreamClientConfigurationImpl extends AbstractStreamClientConfigura
 	public int getRequestRetryCount() {
 		return 0;
 	}
-
+	/**
+	 * Note: leaving this to the default value of {@code -1} will let the HTTP client use its defaults.
+	 *
+	 * @return By default <code>-1</code>, change to change buffer size)
+	 */
+	public int getSocketBufferSize() {
+		return -1;
+	}
 }

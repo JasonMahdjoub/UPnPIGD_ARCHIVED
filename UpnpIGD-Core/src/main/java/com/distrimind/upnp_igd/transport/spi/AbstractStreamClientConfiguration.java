@@ -17,6 +17,7 @@ package com.distrimind.upnp_igd.transport.spi;
 import com.distrimind.upnp_igd.model.ServerClientTokens;
 
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Christian Bauer
@@ -26,6 +27,8 @@ public abstract class AbstractStreamClientConfiguration implements StreamClientC
     protected ExecutorService requestExecutorService;
     protected int timeoutSeconds = 60;
     protected int logWarningSeconds = 5;
+    protected int retryAfterSeconds = (int) TimeUnit.MINUTES.toSeconds(10);
+    protected int retryIterations = 5;
 
     protected AbstractStreamClientConfiguration(ExecutorService requestExecutorService) {
         this.requestExecutorService = requestExecutorService;
@@ -40,6 +43,15 @@ public abstract class AbstractStreamClientConfiguration implements StreamClientC
         this.requestExecutorService = requestExecutorService;
         this.timeoutSeconds = timeoutSeconds;
         this.logWarningSeconds = logWarningSeconds;
+    }
+
+    protected AbstractStreamClientConfiguration(ExecutorService requestExecutorService, int timeoutSeconds,
+                                                int logWarningSeconds, int retryAfterSeconds, int retryIterations) {
+        this.requestExecutorService = requestExecutorService;
+        this.timeoutSeconds = timeoutSeconds;
+        this.logWarningSeconds = logWarningSeconds;
+        this.retryAfterSeconds = retryAfterSeconds;
+        this.retryIterations = retryIterations;
     }
 
     @Override
@@ -81,5 +93,29 @@ public abstract class AbstractStreamClientConfiguration implements StreamClientC
     @Override
 	public String getUserAgentValue(int majorVersion, int minorVersion) {
         return new ServerClientTokens(majorVersion, minorVersion).toString();
+    }
+
+    @Override
+    public int getRetryAfterSeconds() {
+        return retryAfterSeconds;
+    }
+
+    /**
+     * @return Configured value or default of 5 retries.
+     */
+    @Override
+    public int getRetryIterations() {
+        return retryIterations;
+    }
+
+    /**
+     * @param retryAfterSeconds
+     *            should a positive integer or 0 (to disable the functionality).
+     */
+    public void setRetryAfterSeconds(int retryAfterSeconds) {
+        if (retryAfterSeconds < 0) {
+            throw new IllegalArgumentException("Retry After Seconds can not be null!");
+        }
+        this.retryAfterSeconds = retryAfterSeconds;
     }
 }
