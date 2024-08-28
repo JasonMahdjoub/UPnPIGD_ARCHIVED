@@ -35,7 +35,7 @@ public final class TransportConfigurationProvider {
 			//noinspection unchecked
 			constructor = ((Class<TransportConfiguration<?, ?>>)Class.forName("com.distrimind.upnp_igd.android.transport.JettyTransportConfiguration")).getConstructor();
 		} catch (NoSuchMethodException | ClassNotFoundException e) {
-			throw new RuntimeException(e);
+			throw new RuntimeException("Please add dependency com.distrimind.upnp_igd.android:UpnpIGD-Android", e);
 		}
 	}
 
