@@ -33,7 +33,7 @@ import com.distrimind.upnp_igd.transport.Router;
  * Sends a search for all UPnP devices on instantiation. See the
  * {@link AndroidUpnpService} interface for a usage example.
  * </p>
- * <p/>
+ *
  * Override the
  * {@link #createRouter(UpnpServiceConfiguration, ProtocolFactory, android.content.Context)}
  * and {@link #createConfiguration()} methods to customize the service.

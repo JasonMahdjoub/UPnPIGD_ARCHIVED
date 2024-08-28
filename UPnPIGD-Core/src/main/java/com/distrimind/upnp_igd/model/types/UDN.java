@@ -26,7 +26,7 @@ import com.distrimind.upnp_igd.model.ModelUtil;
  * A unique device name.
  * <p>
  * UDA 1.0 does not specify a UUID format, however, UDA 1.1 specifies a format that is compatible
- * with <tt>java.util.UUID</tt> variant 4. You can use any identifier string you like.
+ * with <b>java.util.UUID</b> variant 4. You can use any identifier string you like.
  * </p>
  * <p>
  * You'll most likely need the {@link #uniqueSystemIdentifier(String)} method sooner or later.
