@@ -15,9 +15,7 @@
 
 package com.distrimind.upnp_igd.model.types;
 
-import com.distrimind.upnp_igd.util.io.Base64Coder;
-
-import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 /**
  * @author Christian Bauer
@@ -35,21 +33,25 @@ public class Base64Datatype extends AbstractDatatype<byte[]> {
     @Override
     @SuppressWarnings("PMD.ReturnEmptyCollectionRatherThanNull")
 	public byte[] valueOf(String s) throws InvalidValueException {
-        if (s.isEmpty()) return null;
+        if (s.isEmpty()) {
+            return null;
+        }
         try {
-            return Base64Coder.decode(s);
-        } catch (Exception ex) {
-            throw new InvalidValueException(ex.getMessage(), ex);
+            return Base64.getDecoder().decode(s);
+        } catch (Exception e) {
+            throw new InvalidValueException(e.getMessage(), e);
         }
     }
 
     @Override
     public String getString(byte[] value) throws InvalidValueException {
-        if (value == null) return "";
+        if (value == null) {
+            return "";
+        }
         try {
-            return new String(Base64Coder.encode(value), StandardCharsets.UTF_8);
-        } catch (Exception ex) {
-            throw new InvalidValueException(ex.getMessage(), ex);
+            return Base64.getEncoder().encodeToString(value);
+        } catch (Exception e) {
+            throw new InvalidValueException(e.getMessage(), e);
         }
     }
 
