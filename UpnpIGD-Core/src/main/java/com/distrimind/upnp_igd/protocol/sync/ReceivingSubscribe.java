@@ -29,7 +29,9 @@ import com.distrimind.upnp_igd.model.meta.LocalService;
 import com.distrimind.upnp_igd.model.resource.ServiceEventSubscriptionResource;
 import com.distrimind.upnp_igd.util.Exceptions;
 
+import java.net.InetAddress;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -86,6 +88,25 @@ public class ReceivingSubscribe extends ReceivingSync<StreamRequestMessage, Outg
 
 		IncomingSubscribeRequestMessage requestMessage =
                 new IncomingSubscribeRequestMessage(getInputMessage(), resource.getModel());
+
+		/// UDA 2.0, section 4.1.1: ensure callback url is in private network range
+		if (requestMessage.getCallbackURLs() != null) {
+			for (URL callbackUrl : requestMessage.getCallbackURLs()) {
+				try {
+					InetAddress callbackAddress = InetAddress.getByName(callbackUrl.getHost());
+					if (!(callbackAddress.isLoopbackAddress() ||
+							callbackAddress.isLinkLocalAddress() ||
+							callbackAddress.isSiteLocalAddress())) {
+						log.trace(
+								"Callback URL not on accepted address range: " + getInputMessage());
+						return new OutgoingSubscribeResponseMessage(UpnpResponse.Status.PRECONDITION_FAILED);
+					}
+				} catch (UnknownHostException e) {
+					log.trace("Unknown host for callback URL: " + getInputMessage());
+					return new OutgoingSubscribeResponseMessage(UpnpResponse.Status.PRECONDITION_FAILED);
+				}
+			}
+		}
 
         // Error conditions UDA 1.0 section 4.1.1 and 4.1.2
         if (requestMessage.getSubscriptionId() != null &&
