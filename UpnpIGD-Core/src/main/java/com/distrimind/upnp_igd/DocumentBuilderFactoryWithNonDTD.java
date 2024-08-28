@@ -20,6 +20,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.validation.Schema;
+import java.util.Locale;
 
 /**
  * @author Jason Mahdjoub
@@ -49,8 +50,9 @@ public class DocumentBuilderFactoryWithNonDTD extends DocumentBuilderFactory {
 	}
 	public DocumentBuilderFactoryWithNonDTD(boolean enableDocType) throws ParserConfigurationException {
 		base=DocumentBuilderFactory.newInstance();
+		base.setAttribute("http://apache.org/xml/properties/locale", Locale.ROOT);
 		base.setValidating(false);
-		base.setNamespaceAware(false);
+		base.setNamespaceAware(true);
 		base.setCoalescing(false);
 		base.setFeature("http://xml.org/sax/features/validation", false);
 		base.setFeature("http://apache.org/xml/features/disallow-doctype-decl", !enableDocType);
