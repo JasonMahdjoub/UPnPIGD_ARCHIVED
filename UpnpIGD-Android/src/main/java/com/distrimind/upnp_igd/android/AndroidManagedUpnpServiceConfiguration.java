@@ -281,4 +281,8 @@ public class AndroidManagedUpnpServiceConfiguration implements UpnpServiceConfig
     protected ExecutorService createDefaultExecutorService() {
         return new DefaultUpnpServiceConfiguration.ClingExecutor();
     }
+    @Override
+    public Executor getRemoteListenerExecutor() {
+        return getDefaultExecutorService();
+    }
 }

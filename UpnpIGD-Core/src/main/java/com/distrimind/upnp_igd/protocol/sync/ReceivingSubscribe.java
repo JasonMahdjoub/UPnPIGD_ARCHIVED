@@ -97,12 +97,14 @@ public class ReceivingSubscribe extends ReceivingSync<StreamRequestMessage, Outg
 					if (!(callbackAddress.isLoopbackAddress() ||
 							callbackAddress.isLinkLocalAddress() ||
 							callbackAddress.isSiteLocalAddress())) {
-						log.trace(
+						if (log.isLoggable(Level.FINE))
+							log.fine(
 								"Callback URL not on accepted address range: " + getInputMessage());
 						return new OutgoingSubscribeResponseMessage(UpnpResponse.Status.PRECONDITION_FAILED);
 					}
 				} catch (UnknownHostException e) {
-					log.trace("Unknown host for callback URL: " + getInputMessage());
+					if (log.isLoggable(Level.FINE))
+						log.fine("Unknown host for callback URL: " + getInputMessage());
 					return new OutgoingSubscribeResponseMessage(UpnpResponse.Status.PRECONDITION_FAILED);
 				}
 			}

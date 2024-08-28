@@ -102,7 +102,7 @@ public class DefaultUpnpServiceConfiguration implements UpnpServiceConfiguration
     private final StreamClientConfiguration configuration;
     final private int multicastPort;
     private NetworkAddressFactory networkAddressFactory;
-    private final TransportConfiguration<?, ?> transportConfiguration;
+    private TransportConfiguration<?, ?> transportConfiguration;
 
     /**
      * Defaults to port '0', ephemeral.
@@ -138,7 +138,7 @@ public class DefaultUpnpServiceConfiguration implements UpnpServiceConfiguration
         namespace = createNamespace();
         configuration = new StreamClientConfigurationImpl(defaultExecutorService);
         networkAddressFactory=null;
-        transportConfiguration = TransportConfigurationProvider.getDefaultTransportConfiguration();
+        transportConfiguration = null;
     }
 
     @Override
@@ -162,7 +162,13 @@ public class DefaultUpnpServiceConfiguration implements UpnpServiceConfiguration
 
     @Override
     public StreamClient<?> createStreamClient() {
-        return transportConfiguration.createStreamClient(getSyncProtocolExecutorService(), configuration);
+        return getTransportConfiguration().createStreamClient(getSyncProtocolExecutorService(), configuration);
+    }
+    private TransportConfiguration<?, ?> getTransportConfiguration()
+    {
+        if (transportConfiguration==null)
+            transportConfiguration=TransportConfigurationProvider.getDefaultTransportConfiguration();
+        return transportConfiguration;
     }
 
     @Override
@@ -182,7 +188,7 @@ public class DefaultUpnpServiceConfiguration implements UpnpServiceConfiguration
 
     @Override
     public StreamServer<?> createStreamServer(NetworkAddressFactory networkAddressFactory) {
-        return transportConfiguration.createStreamServer(networkAddressFactory.getStreamListenPort());
+        return getTransportConfiguration().createStreamServer(networkAddressFactory.getStreamListenPort());
     }
 
     @Override

@@ -291,4 +291,8 @@ public class ManagedUpnpServiceConfiguration implements UpnpServiceConfiguration
     protected ExecutorService createDefaultExecutorService() {
         return new DefaultUpnpServiceConfiguration.ClingExecutor();
     }
+    @Override
+    public Executor getRemoteListenerExecutor() {
+        return getDefaultExecutorService();
+    }
 }

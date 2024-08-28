@@ -28,10 +28,7 @@ import com.distrimind.upnp_igd.protocol.ReceivingSync;
 import com.distrimind.upnp_igd.transport.spi.StreamClient;
 import com.distrimind.upnp_igd.transport.spi.StreamServer;
 import com.distrimind.upnp_igd.transport.spi.UpnpStream;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -250,11 +247,30 @@ abstract public class StreamServerClientTest {
         assertFalse(lastExecutedServerProtocol.isComplete);
     }
 
+
+    @DataProvider(name = "invalidURIs")
+    public Object[][] invalidURIs() {
+        return new Object[][] {
+                {"", "http:///", "http:///descriptor.xml", "http://:8081/descriptor.xml"}
+        };
+    }
+
+    @Test(dataProvider = "invalidURIs")
+    public void returnNullForInvalidURI(String uri) throws Exception {
+        // Simulation de l'appel à client.sendRequest
+        assertNull(client.sendRequest(createRequestMessage(new URI(uri))));
+    }
+
+
     protected StreamRequestMessage createRequestMessage(String path) {
         return new StreamRequestMessage(
             UpnpRequest.Method.GET,
             URI.create("http://" + TEST_HOST + ":" + TEST_PORT + path)
         );
+    }
+
+    protected StreamRequestMessage createRequestMessage(URI uri) {
+        return new StreamRequestMessage(UpnpRequest.Method.GET, uri);
     }
 
     abstract public StreamServer<?> createStreamServer(int port);
