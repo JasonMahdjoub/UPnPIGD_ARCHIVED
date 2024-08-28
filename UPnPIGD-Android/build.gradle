@@ -32,8 +32,6 @@ dependencies {
 
     testImplementation 'org.apache-extras.beanshell:bsh:'+beanShellVersion
     testImplementation 'org.testng:testng:'+testngVersion
-    testImplementation 'org.slf4j:slf4j-api:'+slf4jVersion
-    testImplementation 'org.slf4j:slf4j-simple:'+slf4jVersion
 }
 
 jar.archiveBaseName = "UPnPIGD-Android"
