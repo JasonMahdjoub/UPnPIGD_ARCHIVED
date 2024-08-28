@@ -34,6 +34,7 @@ import java.util.logging.Logger;
  * </p>
  *
  * @author Christian Bauer
+ * @author Laurent Garnier - added new parameter to provide a list of network interfaces to consider
  */
 public class NetworkAddressFactoryImpl implements NetworkAddressFactory {
 
@@ -58,7 +59,18 @@ public class NetworkAddressFactoryImpl implements NetworkAddressFactory {
         this(DEFAULT_TCP_HTTP_LISTEN_PORT, Constants.UPNP_MULTICAST_PORT);
     }
 
-    public NetworkAddressFactoryImpl(int streamListenPort, int multicastPort) throws InitializationException {
+	public NetworkAddressFactoryImpl(int streamListenPort, int multicastResponsePort) throws InitializationException {
+		this(streamListenPort, multicastResponsePort, null);
+	}
+
+	public NetworkAddressFactoryImpl(int streamListenPort, int multicastResponsePort, String interfaces)
+			throws InitializationException {
+		String useInterfacesString = interfaces != null && !interfaces.isBlank() ? interfaces
+				: System.getProperty(SYSTEM_PROPERTY_NET_IFACES);
+		if (useInterfacesString != null) {
+			String[] userInterfacesStrings = useInterfacesString.split(",");
+			useInterfaces.addAll(Arrays.asList(userInterfacesStrings));
+		}
     	
     	System.setProperty("java.net.preferIPv4Stack", "true");
 
