@@ -157,7 +157,7 @@ public interface UpnpServiceConfiguration {
    
      * <p>
      * Some control points (XBMC and other Platinum UPnP SDK based devices, OPPO-93) seem
-     * to not properly receive SSDP M-SEARCH replies sent by Cling, but will handle NOTIFY
+     * to not properly receive SSDP M-SEARCH replies sent by UpnpIGD, but will handle NOTIFY
      * alive messages just fine.
    
      *
@@ -206,7 +206,7 @@ public interface UpnpServiceConfiguration {
      * <p>
      * Some devices might require extra headers to recognize your control point, use this
      * method to set these headers. They will be used for every descriptor (XML) retrieval
-     * HTTP request by Cling. See {@link ClientInfo} for
+     * HTTP request by UpnpIGD. See {@link ClientInfo} for
      * action request messages.
    
      *

@@ -49,16 +49,16 @@ import java.util.logging.Logger;
  * doesn't offer the <code>sun.net.www.protocol.http.HttpURLConnection </code> implementation.
  * </p>
  * <p>
- * This implementation <em>DOES NOT WORK</em> on Android. Read the Cling manual for
+ * This implementation <em>DOES NOT WORK</em> on Android. Read the UpnpIGD manual for
  * alternatives for Android.
  * </p>
  * <p>
- * This implementation <em>DOES NOT</em> support Cling's server-side heartbeat for connection checking.
+ * This implementation <em>DOES NOT</em> support UpnpIGD's server-side heartbeat for connection checking.
  * Any data returned by a server has to be "valid HTTP", checked in Sun's HttpClient with:
  * </p>
  * {@code ret = b[0] == 'H' && b[1] == 'T' && b[2] == 'T' && b[3] == 'P' && b[4] == '/' && b[5] == '1' && b[6] == '.';}
  * <p>
- * Hence, if you are using this client, don't call Cling's
+ * Hence, if you are using this client, don't call UpnpIGD's
  * {@link RemoteClientInfo#isRequestCancelled()} function on your
  * server to send a heartbeat to the client!
  * </p>
@@ -85,13 +85,13 @@ public class StreamClientImpl implements StreamClient<StreamClientConfigurationI
             We'd have to basically copy the whole Android code, and have a dependency on
             libcore.*, and do much more hacking to allow more HTTP methods. This is the same
             problem we are hacking below for the JDK but at least there we don't have a
-            dependency issue for compiling Cling. These guys all suck, there is no list
+            dependency issue for compiling UpnpIGD. These guys all suck, there is no list
             of "permitted" HTTP methods. HttpURLConnection and the whole stream handler
             factory stuff is the worst Java API ever created.
             */
             throw new InitializationException(
                 "This client does not work on Android. The design of HttpURLConnection is broken, we "
-                    + "can not add additional 'permitted' HTTP methods. Read the Cling manual."
+                    + "can not add additional 'permitted' HTTP methods. Read the UpnpIGD manual."
             );
         }
 
@@ -262,7 +262,7 @@ public class StreamClientImpl implements StreamClient<StreamClientConfigurationI
         if (urlConnection.getResponseCode() == -1) {
 			if (log.isLoggable(Level.WARNING)) {
 				log.warning("Received an invalid HTTP response: " + urlConnection.getURL());
-				log.warning("Is your Cling-based server sending connection heartbeats with " +
+				log.warning("Is your UpnpIGD-based server sending connection heartbeats with " +
 						"RemoteClientInfo#isRequestCancelled? This client can't handle " +
 						"heartbeats, read the manual.");
 			}

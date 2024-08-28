@@ -62,7 +62,7 @@ public class Icon implements Validatable {
     private Device<?, ?, ?> device;
 
     /**
-     * Used internally by Cling when {@link RemoteDevice} is discovered, you shouldn't have to call this.
+     * Used internally by UpnpIGD when {@link RemoteDevice} is discovered, you shouldn't have to call this.
      */
     public Icon(String mimeType, int width, int height, int depth, URI uri) {
         this(mimeType != null && !mimeType.isEmpty() ? MimeType.valueOf(mimeType) : null, width, height, depth, uri, null);

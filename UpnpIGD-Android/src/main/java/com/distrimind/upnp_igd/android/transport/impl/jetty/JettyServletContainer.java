@@ -69,13 +69,13 @@ public class JettyServletContainer implements ServletContainerAdapter {
             server=new Server(new ExecutorThreadPool((ThreadPoolExecutor) executorService) {
                 @Override
                 protected void doStop() throws Exception {
-                    // Do nothing, don't shut down the Cling ExecutorService when Jetty stops!
+                    // Do nothing, don't shut down the UpnpIGD ExecutorService when Jetty stops!
                 }
             });
             /*INSTANCE.server.setThreadPool(new ExecutorThreadPool(executorService) {
                 @Override
                 protected void doStop() throws Exception {
-                    // Do nothing, don't shut down the Cling ExecutorService when Jetty stops!
+                    // Do nothing, don't shut down the UpnpIGD ExecutorService when Jetty stops!
                 }
             });
         }*/
@@ -181,7 +181,7 @@ public class JettyServletContainer implements ServletContainerAdapter {
             server = new Server(new ExecutorThreadPool(poolExecutor) {
                 @Override
                 protected void doStop() throws Exception {
-                    // Do nothing, don't shut down the Cling ExecutorService when Jetty stops!
+                    // Do nothing, don't shut down the UpnpIGD ExecutorService when Jetty stops!
                 }
             }); // Has its own QueuedThreadPool
             //server.setGracefulShutdown(1000); // Let's wait a second for ongoing transfers to complete
@@ -191,7 +191,7 @@ public class JettyServletContainer implements ServletContainerAdapter {
     /**
      * Casts the request to a Jetty API and tries to write a space character to the output stream of the socket.
      * <p>
-     * This space character might confuse the HTTP client. The Cling transports for Jetty Client and
+     * This space character might confuse the HTTP client. The UpnpIGD transports for Jetty Client and
      * Apache HttpClient have been tested to work with space characters. Unfortunately, Sun JDK's
      * HttpURLConnection does not gracefully handle any garbage in the HTTP request!
    

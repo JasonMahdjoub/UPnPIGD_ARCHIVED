@@ -1,9 +1,9 @@
-This is a fork of Cling, the UPnP stack for Java and Android
+This is a fork of UpnpIGD, the UPnP stack for Java and Android
 ------------------------------------------------------------
 
 The fork fix some security issues, and upgrade used libraries. Efforts was only made into UPNP IGD part. The project's goals are strict specification compliance, complete, clean and extensive APIs, as well as rich SPIs for easy customization.
 
-Cling is Free Software, distributed under the terms of the <a href="https://www.gnu.org/licenses/lgpl-2.1.html">GNU Lesser General Public License</a> <b>or at your option</b> the <a href="https://opensource.org/licenses/CDDL-1.0">Common Development and Distribution License</a>.
+UpnpIGD is Free Software, distributed under the terms of the <a href="https://www.gnu.org/licenses/lgpl-2.1.html">GNU Lesser General Public License</a> <b>or at your option</b> the <a href="https://opensource.org/licenses/CDDL-1.0">Common Development and Distribution License</a>.
 
 This repository is mainly implemented for MaDKitLanEdition
 

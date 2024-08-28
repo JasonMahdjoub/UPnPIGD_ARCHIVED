@@ -28,7 +28,7 @@ import com.distrimind.upnp_igd.binding.annotations.*;
  * The <code>power</code> field is not mapped to the state variables and
  * you are free to design your service internals as you like. Did you
  * notice that you never declared the datatype of your state variables?
- * Also, how can Cling read the "current state" of your service for GENA
+ * Also, how can UpnpIGD read the "current state" of your service for GENA
  * subscribers or when a "query state variable" action is received?
  * Both questions have the same answer.
  * </p>
@@ -36,27 +36,27 @@ import com.distrimind.upnp_igd.binding.annotations.*;
  * Let's consider GENA eventing first. This example has an evented
  * state variable called <code>Status</code>, and if a control point
  * subscribes to the service to be notified of changes, how
- * will Cling obtain the current status? If you'd have used
- * <code>@UpnpStateVariable</code> on your fields, Cling would then
+ * will UpnpIGD obtain the current status? If you'd have used
+ * <code>@UpnpStateVariable</code> on your fields, UpnpIGD would then
  * directly access field values through Java Reflection. On the other
  * hand if you declare state variables not on fields but on your service
- * class, Cling will during binding detect any JavaBean-style getter
+ * class, UpnpIGD will during binding detect any JavaBean-style getter
  * method that matches the derived property name of the state variable.
  * </p>
  * <p>
- * In other words, Cling will discover that your class has a
+ * In other words, UpnpIGD will discover that your class has a
  * <code>getStatus()</code> method. It doesn't matter if that method
  * is also an action-mapped method, the important thing is that it
  * matches JavaBean property naming conventions. The <code>Status</code>
  * UPnP state variable maps to the <code>status</code> property, which
  * is expected to have a <code>getStatus()</code> accessor method.
- * Cling will use this method to read the current state of your
+ * UpnpIGD will use this method to read the current state of your
  * service for GENA subscribers and when the state variable is
  * manually queried.
  * </p>
  * <p>
  * If you do not provide a UPnP datatype name in your
- * <code>@UpnpStateVariable</code> annotation, Cling will use the type
+ * <code>@UpnpStateVariable</code> annotation, UpnpIGD will use the type
  * of the annotated field or discovered JavaBean getter method to
  * figure out the type. The supported default mappings between Java types
  * and UPnP datatypes are shown in the following table:

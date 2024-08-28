@@ -60,7 +60,7 @@ import static org.testng.Assert.*;
  * <a class="citation" href="javacode://this#invokeActions(LocalDevice)" id="ai_findservice" style="include: FINDSERVICE"/>
  * <p>
  * This method will search the device and all its embedded devices for a service with the given
- * identifier and returns either the found <code>Service</code> or <code>null</code>. The Cling
+ * identifier and returns either the found <code>Service</code> or <code>null</code>. The UpnpIGD
  * metamodel is thread-safe, so you can share an instance of <code>Service</code> or
  * <code>Action</code> and access it concurrently.
  * </p>
@@ -102,8 +102,8 @@ import static org.testng.Assert.*;
  * an <code>InvalidValueException</code> will be thrown immediately.
  * </p>
  * <div class="note">
- * <div class="title">Empty values and null in Cling</div>
- * There is no difference between empty string <code>""</code> and <code>null</code> in Cling,
+ * <div class="title">Empty values and null in UpnpIGD</div>
+ * There is no difference between empty string <code>""</code> and <code>null</code> in UpnpIGD,
  * because the UPnP specification does not address this issue. The SOAP  message of an action call
  * or an event message must contain an element {@code <SomeVar></SomeVar>} for all arguments, even if
  * it is an empty XML element. If you provide  an empty string or a null value when preparing a message,

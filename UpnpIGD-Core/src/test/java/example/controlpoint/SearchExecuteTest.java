@@ -51,7 +51,7 @@ import static org.testng.Assert.*;
  * </p>
  * <p>
  * Search messages carry a <em>search type</em> header and receivers consider this header when they
- * evaluate a potential response. The Cling <code>ControlPoint</code> API accepts a
+ * evaluate a potential response. The UpnpIGD <code>ControlPoint</code> API accepts a
  * <code>UpnpHeader</code> argument when creating outgoing search messages.
  * </p>
  * <a class="citation" href="javadoc://this#searchAll" style="read-title: false;"/>

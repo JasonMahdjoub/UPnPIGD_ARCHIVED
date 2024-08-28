@@ -49,12 +49,12 @@ import static org.testng.Assert.*;
  * <a class="citation" href="javadoc://example.localservice.SwitchPowerAnnotatedClass"/>
  * </div>
  * <p>
- * Cling tries to provide smart defaults. For example, the previously shown service classes
+ * UpnpIGD tries to provide smart defaults. For example, the previously shown service classes
  * did not name the related state variable of action output arguments, as required by UPnP.
- * Cling will automatically detect that the <code>getStatus()</code> method is a JavaBean
+ * UpnpIGD will automatically detect that the <code>getStatus()</code> method is a JavaBean
  * getter method (its name starts with <code>get</code> or <code>is</code>) and use the
  * JavaBean property name to find the related state variable. In this case that would be
- * the JavaBean property <code>status</code> and Cling is also smart enough to know that
+ * the JavaBean property <code>status</code> and UpnpIGD is also smart enough to know that
  * you really want the uppercase UPnP state variable named <code>Status</code>.
  * </p>
  * <div class="section">
@@ -63,7 +63,7 @@ import static org.testng.Assert.*;
  * <p>
  * For the next example, let's assume you have a class that was already written, not
  * necessarily  as a service backend for UPnP but for some other purpose. You can't
- * redesign and rewrite your class without interrupting all existing code. Cling offers
+ * redesign and rewrite your class without interrupting all existing code. UpnpIGD offers
  * some flexibility in the mapping of action methods, especially how the output of
  * an action call is obtained.
  * </p>

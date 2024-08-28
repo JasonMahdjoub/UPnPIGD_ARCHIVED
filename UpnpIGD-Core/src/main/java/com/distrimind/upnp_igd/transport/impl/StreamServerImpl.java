@@ -38,7 +38,7 @@ import java.util.logging.Logger;
  * documentation of the SUN JDK 6.0 HTTP Server</a>.
  * </p>
  * <p>
- * This implementation <em>DOES NOT WORK</em> on Android. Read the Cling manual for
+ * This implementation <em>DOES NOT WORK</em> on Android. Read the UpnpIGD manual for
  * alternatives for Android.
  * </p>
  * <p>

@@ -25,7 +25,7 @@ import com.distrimind.upnp_igd.binding.annotations.*;
  * </p>
  * <a class="citation" href="javacode://this" style="include:INC1"/>
  * <p>
- * Cling will detect that you mapped a getter name in the output argument
+ * UpnpIGD will detect that you mapped a getter name in the output argument
  * and that the action method is not <code>void</code>. It now expects that
  * it will find the getter method on the returned JavaBean. If there are
  * several output arguments, all of them have to be mapped to getter methods

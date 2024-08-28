@@ -44,7 +44,7 @@ public class DefaultRegistryListener implements RegistryListener {
     /**
      * Calls the {@link #deviceAdded(Registry, Device)} method.
      *
-     * @param registry The Cling registry of all devices and services know to the local UPnP stack.
+     * @param registry The UpnpIGD registry of all devices and services know to the local UPnP stack.
      * @param device   A validated and hydrated device metadata graph, with complete service metadata.
      */
     @Override
@@ -60,7 +60,7 @@ public class DefaultRegistryListener implements RegistryListener {
     /**
      * Calls the {@link #deviceRemoved(Registry, Device)} method.
      *
-     * @param registry The Cling registry of all devices and services know to the local UPnP stack.
+     * @param registry The UpnpIGD registry of all devices and services know to the local UPnP stack.
      * @param device   A validated and hydrated device metadata graph, with complete service metadata.
      */
     @Override
@@ -71,7 +71,7 @@ public class DefaultRegistryListener implements RegistryListener {
     /**
      * Calls the {@link #deviceAdded(Registry, Device)} method.
      *
-     * @param registry The Cling registry of all devices and services know to the local UPnP stack.
+     * @param registry The UpnpIGD registry of all devices and services know to the local UPnP stack.
      * @param device   The local device added to the {@link Registry}.
      */
     @Override
@@ -82,7 +82,7 @@ public class DefaultRegistryListener implements RegistryListener {
     /**
      * Calls the {@link #deviceRemoved(Registry, Device)} method.
      *
-     * @param registry The Cling registry of all devices and services know to the local UPnP stack.
+     * @param registry The UpnpIGD registry of all devices and services know to the local UPnP stack.
      * @param device   The local device removed from the {@link Registry}.
      */
     @Override

@@ -18,7 +18,7 @@ package com.distrimind.upnp_igd.model.message;
 import java.net.InetAddress;
 
 /**
- * An API for the Cling protocol layer to access some transport layer details.
+ * An API for the UpnpIGD protocol layer to access some transport layer details.
  *
  * @author Christian Bauer
  */

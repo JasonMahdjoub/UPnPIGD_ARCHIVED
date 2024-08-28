@@ -50,7 +50,7 @@ import java.util.logging.Logger;
  *newPortMappingListener(newPortMapping(8123, "10.0.0.2",PortMapping.Protocol.TCP))
  * );}</pre>
  * <p>
- * If all you need from the Cling UPnP stack is NAT port mapping, use the following idiom:
+ * If all you need from the UpnpIGD UPnP stack is NAT port mapping, use the following idiom:
  * </p>
  * <pre>{@code
  * UpnpService upnpService = new UpnpServiceImpl(

@@ -97,7 +97,7 @@ public class Main {
         };
 
         // This will create necessary network resources for UPnP right away
-        System.out.println("Starting Cling...");
+        System.out.println("Starting UpnpIGD...");
         UpnpService upnpService = new UpnpServiceImpl(listener);
 
         // Send a search message to all devices and services, they should respond soon
@@ -109,7 +109,7 @@ public class Main {
         Thread.sleep(10000);
 
         // Release all resources and advertise BYEBYE to other UPnP devices
-        System.out.println("Stopping Cling...");
+        System.out.println("Stopping UpnpIGD...");
         upnpService.shutdown();
     }
 }

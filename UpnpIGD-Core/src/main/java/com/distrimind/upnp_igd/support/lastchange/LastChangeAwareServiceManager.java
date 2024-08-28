@@ -28,7 +28,7 @@ import java.util.Collection;
  * Handles the "initial" event state for GENA subscriptions to services using LastChange.
  * <p>
  * When a GENA subscription is made on your AVTransport/RenderingControl service, you have to
- * read the initial state of the service. Ususally Cling would do this for you and simply
+ * read the initial state of the service. Ususally UpnpIGD would do this for you and simply
  * access all the state variables of your service behind the scenes. But the
  * AVTransport/RenderingControl service doesn't use regular UPnP state variable eventing
  * internally, they rely on the awful "LastChange" mechanism for their "logical" instances.

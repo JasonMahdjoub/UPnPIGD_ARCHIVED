@@ -38,11 +38,11 @@ import java.util.logging.Logger;
 /**
  * Adapter for CDI environments.
  * <p>
- * The CDI container provides injectable instances of Cling UPnP interfaces, e.g.
+ * The CDI container provides injectable instances of UpnpIGD UPnP interfaces, e.g.
  * you can <code>@Inject Registry</code> or <code>@Inject ControlPoint</code>.
  * </p>
  * <p>
- * Furthermore, this adapter also binds Cling into the CDI eventing system. You
+ * Furthermore, this adapter also binds UpnpIGD into the CDI eventing system. You
  * can <code>@Observe RemoteDeviceDiscoveryStart</code> etc. events of the
  * registry.
  * </p>

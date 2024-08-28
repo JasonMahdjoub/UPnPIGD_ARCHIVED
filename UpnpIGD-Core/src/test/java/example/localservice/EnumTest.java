@@ -34,14 +34,14 @@ import static org.testng.Assert.assertNull;
 /**
  * Working with enums
  * <p>
- * Java <code>enum</code>'s are special, unfortunately: Cling can convert
+ * Java <code>enum</code>'s are special, unfortunately: UpnpIGD can convert
  * your enum value into a string for transport in UPnP messages, but you
  * have to convert it back manually from a string. This is shown in the
  * following service example:
  * </p>
  * <a class="citation" href="javacode://example.localservice.MyServiceWithEnum" style="include: INC1"/>
  * <p>
- * Cling will automatically assume that the datatype is a UPnP string if the
+ * UpnpIGD will automatically assume that the datatype is a UPnP string if the
  * field (or getter) or getter Java type is an enum. Furthermore, an
  * <code>&lt;allowedValueList&gt;</code> will be created in your service descriptor
  * XML, so control points know that this state variable has in fact a defined

@@ -41,9 +41,9 @@ import java.util.concurrent.ExecutorService;
 public interface ServletContainerAdapter {
 
     /**
-     * Might be called several times to integrate the servlet container with Cling's executor
+     * Might be called several times to integrate the servlet container with UpnpIGD's executor
      * configuration. You can ignore this call if you want to configure the container's thread
-     * pooling independently of Cling. If you use the given Cling <code>ExecutorService</code>,
+     * pooling independently of UpnpIGD. If you use the given UpnpIGD <code>ExecutorService</code>,
      * make sure the Jetty container won't shut it down when {@link #stopIfRunning()} is called!
      *
      * @param executorService The service to use when spawning new servlet execution threads.
@@ -52,9 +52,9 @@ public interface ServletContainerAdapter {
 
     /**
      * Might be called several times to set up the connectors. This is the host/address
-     * and the port Cling expects to receive HTTP requests on. If you set up your HTTP
-     * server connectors elsewhere and ignore when Cling calls this method, make sure
-     * you configure Cling with the correct host/port of your servlet container.
+     * and the port UpnpIGD expects to receive HTTP requests on. If you set up your HTTP
+     * server connectors elsewhere and ignore when UpnpIGD calls this method, make sure
+     * you configure UpnpIGD with the correct host/port of your servlet container.
      *
      * @param host The host address for the socket.
      * @param port The port, might be <code>-1</code> to bind to an ephemeral port.

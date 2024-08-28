@@ -50,7 +50,7 @@ import static org.testng.Assert.assertTrue;
  * Here we are calling the <code>SetTarget</code> action of a <em>SwitchPower:1</em> service, and after waiting a
  * (short) time period, we cancel the request. What happens now depends on the invocation and what service you are
  * calling. If it's a local service, and no network access is needed, the thread calling the local service (method)
- * will simply be interrupted. If you are calling a remote service, Cling will abort the HTTP request to the server.
+ * will simply be interrupted. If you are calling a remote service, UpnpIGD will abort the HTTP request to the server.
  * </p>
  * <p>
  * Most likely you want to handle this explicit cancellation of an action call in your action invocation callback, so
@@ -69,12 +69,12 @@ import static org.testng.Assert.assertTrue;
  * <p>
  * There is no guarantee that the server will actually stop processing your request. When the client closes the
  * connection, the server doesn't get notified. The server will complete the action call and only fail when trying to
- * return the response to the client on the closed connection. Cling's server transports offer a special heartbeat
+ * return the response to the client on the closed connection. UpnpIGD's server transports offer a special heartbeat
  * feature for checking client connections, we'll discuss this feature later in this chapter. Other UPnP servers will
  * most likely not detect a dropped client connection immediately.
  * </p>
  * <p>
- * Not all HTTP client transports in Cling support interruption of requests:
+ * Not all HTTP client transports in UpnpIGD support interruption of requests:
  * </p>
  * <table class="infotable fullwidth" border="1">
  * <thead>

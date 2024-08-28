@@ -54,7 +54,7 @@ public interface RegistryListener {
      * for slower UPnP hosts (such as Android handsets).
    
      *
-     * @param registry The Cling registry of all devices and services know to the local UPnP stack.
+     * @param registry The UpnpIGD registry of all devices and services know to the local UPnP stack.
      * @param device   A validated and hydrated device metadata graph, with anemic service metadata.
      */
 	void remoteDeviceDiscoveryStarted(Registry registry, RemoteDevice device);
@@ -66,7 +66,7 @@ public interface RegistryListener {
      * method, you might want to override this method as well.
    
      *
-     * @param registry The Cling registry of all devices and services know to the local UPnP stack.
+     * @param registry The UpnpIGD registry of all devices and services know to the local UPnP stack.
      * @param device   A validated and hydrated device metadata graph, with anemic service metadata.
      * @param ex       The reason why service metadata could not be initialized, or <code>null</code> if service
      *                 descriptors couldn't be retrieved at all.
@@ -76,7 +76,7 @@ public interface RegistryListener {
     /**
      * Called when complete metadata of a newly discovered device is available.
      *
-     * @param registry The Cling registry of all devices and services know to the local UPnP stack.
+     * @param registry The UpnpIGD registry of all devices and services know to the local UPnP stack.
      * @param device   A validated and hydrated device metadata graph, with complete service metadata.
      */
 	void remoteDeviceAdded(Registry registry, RemoteDevice device);
@@ -88,7 +88,7 @@ public interface RegistryListener {
      * event. You will be notified when a device disappears through timeout.
    
      *
-     * @param registry The Cling registry of all devices and services know to the local UPnP stack.
+     * @param registry The UpnpIGD registry of all devices and services know to the local UPnP stack.
      * @param device   A validated and hydrated device metadata graph, with complete service metadata.
      */
 	void remoteDeviceUpdated(Registry registry, RemoteDevice device);
@@ -101,7 +101,7 @@ public interface RegistryListener {
      * when the UPnP stack is shutting down.
    
      *
-     * @param registry The Cling registry of all devices and services know to the local UPnP stack.
+     * @param registry The UpnpIGD registry of all devices and services know to the local UPnP stack.
      * @param device   A validated and hydrated device metadata graph, with complete service metadata.
      */
 	void remoteDeviceRemoved(Registry registry, RemoteDevice device);
@@ -109,7 +109,7 @@ public interface RegistryListener {
     /**
      * Called after you add your own device to the {@link Registry}.
      *
-     * @param registry The Cling registry of all devices and services know to the local UPnP stack.
+     * @param registry The UpnpIGD registry of all devices and services know to the local UPnP stack.
      * @param device   The local device added to the {@link Registry}.
      */
 	void localDeviceAdded(Registry registry, LocalDevice<?> device);
@@ -119,7 +119,7 @@ public interface RegistryListener {
      * <p>
      * This method will not be called when the UPnP stack is shutting down.
    
-     * @param registry The Cling registry of all devices and services know to the local UPnP stack.
+     * @param registry The UpnpIGD registry of all devices and services know to the local UPnP stack.
      * @param device   The local device removed from the {@link Registry}.
      */
 	void localDeviceRemoved(Registry registry, LocalDevice<?> device);
@@ -129,7 +129,7 @@ public interface RegistryListener {
      * <p>
      * This method should typically not block, it executes in the thread that shuts down the UPnP stack.
    
-     * @param registry The Cling registry of all devices and services know to the local UPnP stack.
+     * @param registry The UpnpIGD registry of all devices and services know to the local UPnP stack.
      */
 	void beforeShutdown(Registry registry);
 

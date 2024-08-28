@@ -23,7 +23,7 @@ import com.distrimind.upnp_igd.transport.spi.UpnpStream;
 /**
  * Settings for the async Servlet 3.0 implementation.
  * <p>
- * If you are trying to integrate Cling with an existing/running servlet
+ * If you are trying to integrate UpnpIGD with an existing/running servlet
  * container, implement {@link ServletContainerAdapter}.
  * </p>
  *

@@ -21,7 +21,7 @@ import com.distrimind.upnp_igd.registry.Registry;
 import com.distrimind.upnp_igd.transport.Router;
 
 /**
- * Primary interface of the Cling Core UPnP stack.
+ * Primary interface of the UpnpIGD Core UPnP stack.
  * <p>
  * An implementation can either start immediately when constructed or offer an additional
  * method that starts the UPnP stack on-demand. Implementations are not required to be

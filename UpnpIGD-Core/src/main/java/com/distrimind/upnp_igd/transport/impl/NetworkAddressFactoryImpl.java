@@ -74,7 +74,6 @@ public class NetworkAddressFactoryImpl implements NetworkAddressFactory {
     	
     	System.setProperty("java.net.preferIPv4Stack", "true");
 
-        String useInterfacesString = System.getProperty(SYSTEM_PROPERTY_NET_IFACES);
         if (useInterfacesString != null) {
             String[] userInterfacesStrings = useInterfacesString.split(",");
             useInterfaces.addAll(Arrays.asList(userInterfacesStrings));
@@ -99,7 +98,7 @@ public class NetworkAddressFactoryImpl implements NetworkAddressFactory {
         }
 
         this.streamListenPort = streamListenPort;
-        this.multicastPort=multicastPort;
+        this.multicastPort=multicastResponsePort;
     }
 
 

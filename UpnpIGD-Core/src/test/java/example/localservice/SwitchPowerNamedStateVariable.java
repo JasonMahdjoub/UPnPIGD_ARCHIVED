@@ -33,13 +33,13 @@ import com.distrimind.upnp_igd.binding.annotations.*;
  * output argument.
  * </p>
  * <p>
- * The "related statevariable" detection algorithm in Cling has one more trick
+ * The "related statevariable" detection algorithm in UpnpIGD has one more trick
  * up its sleeve however. The UPnP specification says that a state variable which
  * is only ever used to describe the type of an input or output argument should
  * be named with the prefix <code>A_ARG_TYPE_</code>. So if you do not name the
- * related state variable of your action argument, Cling will also
+ * related state variable of your action argument, UpnpIGD will also
  * look for a state variable with the name
- * <code>A_ARG_TYPE_[Name Of Your Argument]</code>. In the example above, Cling
+ * <code>A_ARG_TYPE_[Name Of Your Argument]</code>. In the example above, UpnpIGD
  * is therefore also searching (unsuccessfully) for a state variable named
  * <code>A_ARG_TYPE_ResultStatus</code>. (Given that direct querying
  * of state variables is already deprecated in UDA 1.0, there are <em>NO</em>

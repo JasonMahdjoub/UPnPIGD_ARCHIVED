@@ -5,7 +5,7 @@
 
         <p>
             UPnP utilizes XML documents to transport device and service information between the provider and
-            any control points. These XML documents have to be parsed by Cling to produce the
+            any control points. These XML documents have to be parsed by UpnpIGD to produce the
             <code>Device</code> model, and of course generated from a <code>Device</code> model.
             The same approach is used for the <code>Service</code> model. This parsing, generating, and binding
             is the job of the <code>DeviceDescriptorBinder</code> and the
@@ -13,7 +13,7 @@
         </p>
 
         <p>
-            The following implementations are bundled with Cling Core for device descriptor binding:
+            The following implementations are bundled with UpnpIGD Core for device descriptor binding:
         </p>
 
         <dl>
@@ -42,7 +42,7 @@
         </dl>
 
         <p>
-            The following implementations are bundled with Cling Core for service descriptor binding:
+            The following implementations are bundled with UpnpIGD Core for service descriptor binding:
         </p>
 
         <dl>
@@ -86,7 +86,7 @@
         <p>
             Performance problems with UPnP discovery are usually caused by too many XML descriptors, not
             by their size. This is inherent in the bad design of UPnP; each device may expose many individual
-            service descriptors, and Cling will always retrieve all device metadata. The HTTP requests
+            service descriptors, and UpnpIGD will always retrieve all device metadata. The HTTP requests
             necessary to retrieve dozens of descriptor files usually outweighs the cost of parsing each.
         </p>
 

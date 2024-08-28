@@ -49,7 +49,7 @@ import static org.testng.Assert.assertEquals;
  * <a class="citation" id="MyServiceWithAllowedValueProvider-VAR" href="javacode://example.localservice.MyServiceWithAllowedValueProvider" style="include: VAR"/>
  * <p>
  * Note that this provider will only be queried when your annotations are being processed,
- * once when your service is bound in Cling.
+ * once when your service is bound in UpnpIGD.
  * </p>
  */
 public class AllowedValueTest {

@@ -56,20 +56,20 @@ import com.distrimind.upnp_igd.model.profile.RemoteClientInfo;
  *    style="include: ACTION_METHOD; exclude: ACTUAL_WORK;"/>
  *
  * <p>
- * You abort processing by throwing an <code>InterruptedException</code>, Cling will do the rest. Cling will send
+ * You abort processing by throwing an <code>InterruptedException</code>, UpnpIGD will do the rest. UpnpIGD will send
  * a heartbeat to the client whenever you check if the remote request was cancelled with the optional
  * <code>RemoteClientInfo</code>, see <a href="#javadoc.example.localservice.RemoteClientInfoTest">this section</a>.
  * </p>
  * <p>
- * <em>Danger:</em> Not all HTTP clients can deal with Cling's heartbeat signal. Not even all bundled
- * <code>StreamClient</code>'s of Cling can handle such a signal. You should only use this feature if you are sure that
- * all clients of your service will ignore the meaningless heartbeat signal. Cling sends a space character (this is
+ * <em>Danger:</em> Not all HTTP clients can deal with UpnpIGD's heartbeat signal. Not even all bundled
+ * <code>StreamClient</code>'s of UpnpIGD can handle such a signal. You should only use this feature if you are sure that
+ * all clients of your service will ignore the meaningless heartbeat signal. UpnpIGD sends a space character (this is
  * configurable) to the HTTP client to check the connection. Hence, the HTTP client sees a response such as
  * '[space][space][space]HTTP/1.0', with a space character for each alive check. If your HTTP client does not trim those
  * space characters before parsing the response, it will fail processing your otherwise valid response.
  * </p>
  * <p>
- * The following Cling-bundled client transports can deal with a heartbeat signal:
+ * The following UpnpIGD-bundled client transports can deal with a heartbeat signal:
  * </p>
  * <table class="infotable fullwidth" border="1">
  * <thead>
@@ -100,7 +100,7 @@ import com.distrimind.upnp_igd.model.profile.RemoteClientInfo;
  * </tbody>
  * </table>
  * <p>
- * Equally important, not all server transports in Cling can send heartbeat signals, as low-level socket access is
+ * Equally important, not all server transports in UpnpIGD can send heartbeat signals, as low-level socket access is
  * required. Some server APIs do not provide this low-level access. If you check the connection state with those
  * transports, the connection is always "alive":
  * </p>

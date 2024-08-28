@@ -81,7 +81,7 @@ public class RegistryListenerTest {
     /**
      * <p>
      * The <code>remoteDeviceDiscoveryStarted()</code> and <code>remoteDeviceDiscoveryFailed()</code>
-     * methods are completely optional but useful on slow machines (such as Android handsets). Cling
+     * methods are completely optional but useful on slow machines (such as Android handsets). UpnpIGD
      * will retrieve and initialize all device metadata for each UPnP device before it will announce
      * it on the <code>Registry</code>. UPnP metadata is split into several XML descriptors, so retrieval
      * via HTTP of these descriptors, parsing, and validating all metadata for a complex UPnP device

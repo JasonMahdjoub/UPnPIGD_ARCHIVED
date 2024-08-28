@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Cling Core - All Tests" parallel="false" thread-count="1" verbose="1">
+<suite name="UpnpIGD Core - All Tests" parallel="false" thread-count="1" verbose="1">
 
     <!--
     These tests are multi-threaded and seem to fail on some machines, there are
