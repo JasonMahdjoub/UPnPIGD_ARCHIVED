@@ -46,7 +46,7 @@ subprojects {
         jettyVersion='12.0.12'
         beanShellVersion='2.0b6'
         jsoupVersion='1.18.1'
-        jakartaCdiAPIVersion='4.1.0'
+        jakartaCdiAPIVersion='4.0.1'
         jakartaServletVersion='6.0.0'//this version depends on used jetty version into Android module
         testngVersion='7.10.2'
 
