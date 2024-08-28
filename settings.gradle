@@ -15,6 +15,6 @@ include 'api'
 include 'services:webservice'
 */
 rootProject.name = 'UPnPIGD'
-include 'UpnpIGD-Core'
-include 'UpnpIGD-Android'
+include 'UPnPIGD-Core'
+include 'UPnPIGD-Android'
 

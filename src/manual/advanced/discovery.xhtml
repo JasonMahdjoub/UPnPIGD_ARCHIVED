@@ -5,7 +5,7 @@
 
         <p>
             Device discovery in UPnP is the job of SSDP, the Simple Service Discovery Protocol. Of course, this
-            protocol is not simple at all and many device manufacturers and UPnP stacks get it wrong. UpnpIGD has
+            protocol is not simple at all and many device manufacturers and UPnP stacks get it wrong. UPnPIGD has
             some extra settings to deal with such environments; if you want best interoperability for your
             application, you have to read the following sections.
         </p>
@@ -23,7 +23,7 @@
                 </p>
 
                 <p>
-                    UpnpIGD will usually expire remote devices once their initially advertised "maximum age"
+                    UPnPIGD will usually expire remote devices once their initially advertised "maximum age"
                     has been reached and there was no ALIVE message to refresh the advertisement. You can
                     change this behavior with <code>UpnpServiceConfiguration</code>:
                 </p>
@@ -40,13 +40,13 @@
 
                 <p>
                     If you return zero maximum age, all remote devices will forever stay in your
-                    <code>Registry</code> once they have been discovered, UpnpIGD will not expire them. You have
+                    <code>Registry</code> once they have been discovered, UPnPIGD will not expire them. You have
                     to manually remove them from the <code>Registry</code> if you know they are gone (e.g. once
                     an action request fails with "no response").
                 </p>
 
                 <p>
-                    Alternatively, you can return the number of seconds UpnpIGD should keep a remote device
+                    Alternatively, you can return the number of seconds UPnPIGD should keep a remote device
                     in the <code>Registry</code>, ignoring the device's advertised maximum age.
                 </p>
 
@@ -59,7 +59,7 @@
 
                 <p>
                     Some control points have difficulties with M-SEARCH responses. They search for
-                    your device, then can't process the (specification-compliant) response made by UpnpIGD and
+                    your device, then can't process the (specification-compliant) response made by UPnPIGD and
                     therefore don't discover your device when they search. However, such control points
                     typically have no problem with alive NOTIFY messages, only with search responses.
                 </p>
@@ -85,7 +85,7 @@
                 </p>
 
                 <p>
-                    If you return a non-zero value, UpnpIGD will send alive NOTIFY messages repeatedly with the
+                    If you return a non-zero value, UPnPIGD will send alive NOTIFY messages repeatedly with the
                     given interval, and remote control points should be able to discover your device within
                     that period. The downside is of course more traffic on your network.
                 </p>
@@ -105,11 +105,11 @@
 
                 <p>
                     The <code>DiscoveryOptions</code> class offers several parameters to influence
-                    how UpnpIGD handles device discovery.
+                    how UPnPIGD handles device discovery.
                 </p>
 
                 <p>
-                    With disabled advertising, UpnpIGD will then not send <em>any</em> NOTIFY messages for
+                    With disabled advertising, UPnPIGD will then not send <em>any</em> NOTIFY messages for
                     a device; you can enable advertisement again with
                     <code>Registry#setDiscoveryOptions(UDN, null)</code>, or by providing different options.
                 </p>
@@ -123,7 +123,7 @@
 
                 <p>
                     A rarely used setting of <code>DiscoveryOptions</code> is <code>byeByeBeforeFirstAlive</code>:
-                    If enabled, UpnpIGD will send a byebye NOTIFY message before sending the first alive NOTIFY
+                    If enabled, UPnPIGD will send a byebye NOTIFY message before sending the first alive NOTIFY
                     message. This happens only once, when a <code>LocalDevice</code> is added to the
                     <code>Registry</code>, and it wasn't registered before.
                 </p>

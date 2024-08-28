@@ -1,0 +1,40 @@
+group='com.distrimind.upnp_igd'
+
+java {
+
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
+}
+
+dependencies {
+    implementation 'org.jsoup:jsoup:'+jsoupVersion
+    compileOnly 'jakarta.enterprise:jakarta.enterprise.cdi-api:'+jakartaCdiAPIVersion
+
+    testImplementation 'org.testng:testng:'+testngVersion
+    testImplementation 'org.slf4j:slf4j-api:'+slf4jVersion
+    testImplementation 'org.slf4j:slf4j-simple:'+slf4jVersion
+}
+
+jar.archiveBaseName = "UPnPIGD-Core"
+
+
+artifacts {
+    archives jar
+    archives javadocJar
+    archives sourcesJar
+}
+test {
+
+    // enable TestNG support (default is JUnit)
+    useTestNG
+            {
+                suites 'src/test/AllTests.tng.xml'
+            }
+
+    // set heap size for the test JVM(s)
+    minHeapSize = "1m"
+    maxHeapSize = "6g"
+    /*testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+    }*/
+}

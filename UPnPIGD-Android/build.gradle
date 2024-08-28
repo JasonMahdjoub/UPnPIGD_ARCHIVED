@@ -1,0 +1,62 @@
+group='com.distrimind.upnp_igd.android'
+
+java {
+
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
+}
+
+dependencies {
+    implementation project(':UPnPIGD-Core')
+    compileOnly files('FlatLibs/AndroidStub-4.2.0.0.jar')
+
+
+    compileOnly 'org.eclipse.jetty:jetty-server:'+jettyVersion
+    compileOnly 'org.eclipse.jetty.ee10:jetty-ee10-servlet:'+jettyVersion
+    compileOnly 'org.eclipse.jetty:jetty-client:'+jettyVersion
+
+    compileOnly 'jakarta.enterprise:jakarta.enterprise.cdi-api:'+jakartaCdiAPIVersion
+    //compileOnly 'jakarta.servlet:jakarta.servlet-api:'+jakartaServletVersion
+
+
+
+    testImplementation project(':UPnPIGD-Core').sourceSets.test.output
+    testImplementation files('FlatLibs/AndroidStub-4.2.0.0.jar')
+
+
+    testImplementation 'org.eclipse.jetty:jetty-server:'+jettyVersion
+    testImplementation 'org.eclipse.jetty.ee10:jetty-ee10-servlet:'+jettyVersion
+    testImplementation 'org.eclipse.jetty:jetty-client:'+jettyVersion
+
+    testImplementation 'jakarta.enterprise:jakarta.enterprise.cdi-api:'+jakartaCdiAPIVersion
+
+    testImplementation 'org.apache-extras.beanshell:bsh:'+beanShellVersion
+    testImplementation 'org.testng:testng:'+testngVersion
+    testImplementation 'org.slf4j:slf4j-api:'+slf4jVersion
+    testImplementation 'org.slf4j:slf4j-simple:'+slf4jVersion
+}
+
+jar.archiveBaseName = "UPnPIGD-Android"
+
+
+artifacts {
+    archives jar
+    archives javadocJar
+    archives sourcesJar
+}
+
+test {
+
+    // enable TestNG support (default is JUnit)
+    useTestNG
+            {
+                suites 'src/test/AllTests.tng.xml'
+            }
+
+    // set heap size for the test JVM(s)
+    minHeapSize = "1m"
+    maxHeapSize = "6g"
+    /*testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+    }*/
+}

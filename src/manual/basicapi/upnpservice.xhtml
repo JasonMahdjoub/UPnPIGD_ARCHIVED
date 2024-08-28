@@ -21,7 +21,7 @@
 
         <p>
             An instance of <code>UpnpService</code> represents a running UPnP stack, including
-            all network listeners, background maintenance threads, and so on. UpnpIGD Core bundles a default
+            all network listeners, background maintenance threads, and so on. UPnPIGD Core bundles a default
             implementation which you can simply instantiate as follows:
         </p>
 
@@ -75,7 +75,7 @@
             <div class="content">
 
                 <p>
-                    This is the configuration interface of the default UPnP stack in UpnpIGD Core, an instance of
+                    This is the configuration interface of the default UPnP stack in UPnPIGD Core, an instance of
                     which you have to provide when creating the <code>UpnpServiceImpl</code>:
                 </p>
 
@@ -123,7 +123,7 @@
                 </p>
 
                 <p>
-                    The configuration settings reflect the internal structure of UpnpIGD Core:
+                    The configuration settings reflect the internal structure of UPnPIGD Core:
                 </p>
 
                 <dl>
@@ -152,19 +152,19 @@
                             Stream messages are TCP/HTTP requests and responses, the default configuration
                             will use the Sun JDK 6.0 webserver to listen for HTTP requests, and it sends
                             HTTP requests with the standard JDK <code>HttpURLConnection</code>. This means
-                            there are by default no additional dependencies on any HTTP server/library by UpnpIGD
-                            Core. However, if you are trying to use UpnpIGD Core in a runtime container such as Tomcat,
+                            there are by default no additional dependencies on any HTTP server/library by UPnPIGD
+                            Core. However, if you are trying to use UPnPIGD Core in a runtime container such as Tomcat,
                             JBoss AS, or Glassfish, you might run into an error on startup. The error tells you that
-                            UpnpIGD couldn't use the Java JDK's <code>HTTPURLConnection</code> for HTTP client operations.
+                            UPnPIGD couldn't use the Java JDK's <code>HTTPURLConnection</code> for HTTP client operations.
                             This is an old and badly designed part of the JDK: Only "one application" in the whole JVM
                             can configure URL connections. If your container is already using the
-                            <code>HTTPURLConnection</code>, you have to switch UpnpIGD to an alternative HTTP client. See
+                            <code>HTTPURLConnection</code>, you have to switch UPnPIGD to an alternative HTTP client. See
                             <a href="#section.ConfiguringTransports">Configuring network transports</a> for other
                             available options and how to change various network-related settings.
                         </p>
                         <p>
                             UDP unicast and multicast datagrams are received, parsed, and send by a custom
-                            implementation bundled with UpnpIGD Core that does not require any particular Sun
+                            implementation bundled with UPnPIGD Core that does not require any particular Sun
                             JDK classes, they should work an all platforms and in any environment.
                         </p>
                     </dd>
@@ -195,7 +195,7 @@
                     <dt>Executors</dt>
                     <dd>
                         <p>
-                            The UpnpIGD UPnP stack is multi-threaded, thread creation and execution is handled
+                            The UPnPIGD UPnP stack is multi-threaded, thread creation and execution is handled
                             through <code>java.util.concurrent</code> executors. The default configuration
                             uses a pool of threads with a maximum size of 64 concurrently running threads,
                             which should suffice for even very large installations. Executors can be
@@ -211,14 +211,14 @@
                         <p>
                             Your local device and service XML descriptors and icons can be served with a given
                             <code>Namespace</code>, defining how the URL paths of local resources is constructed.
-                            You can also configure how frequently UpnpIGD will check its <code>Registry</code> for
+                            You can also configure how frequently UPnPIGD will check its <code>Registry</code> for
                             outdated devices and expired GENA subscriptions.
                         </p>
                     </dd>
                 </dl>
 
                 <p>
-                    There are various other, rarely needed, configuration options available for customizing UpnpIGD's
+                    There are various other, rarely needed, configuration options available for customizing UPnPIGD's
                     behavior, see the Javadoc of <code>UpnpConfiguration</code>.
                 </p>
 
@@ -231,7 +231,7 @@
             <div class="content">
 
                 <p>
-                    UpnpIGD Core internals are modular and any aspect of the UPnP protocol is handled by
+                    UPnPIGD Core internals are modular and any aspect of the UPnP protocol is handled by
                     an implementation (class) which can be replaced without affecting any other aspect.
                     The <code>ProtocolFactory</code> provides implementations, it is
                     always the first access point for the UPnP stack when a message which arrives on the
@@ -309,7 +309,7 @@
                 <p>
                     UPnP works with two types of messages: Multicast and unicast UDP
                     datagrams which are typically handled asynchronously, and request/response TCP messages
-                    with an HTTP payload. The UpnpIGD Core bundled <code>RouterImpl</code> will
+                    with an HTTP payload. The UPnPIGD Core bundled <code>RouterImpl</code> will
                     instantiate and maintain the listeners for incoming messages as well as transmit any
                     outgoing messages.
                 </p>

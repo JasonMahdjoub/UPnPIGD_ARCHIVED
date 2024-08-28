@@ -1,21 +1,21 @@
 <div class="chapter" id="chapter.Android"
      xmlns="http://www.w3.org/1999/xhtml">
 
-    <div class="title">UpnpIGD on Android</div>
+    <div class="title">UPnPIGD on Android</div>
     <div class="content">
 
         <p>
-            UpnpIGD Core provides a UPnP stack for Android applications. Typically you'd write control point applications,
+            UPnPIGD Core provides a UPnP stack for Android applications. Typically you'd write control point applications,
             as most Android systems today are small hand-held devices. You can however also write UPnP server
-            applications on Android, all features of UpnpIGD Core are supported.
+            applications on Android, all features of UPnPIGD Core are supported.
         </p>
 
         <p>
-            Android platform level 15 (4.0) is required for UpnpIGD 2.x, use UpnpIGD 1.x to support older Android versions.
+            Android platform level 15 (4.0) is required for UPnPIGD 2.x, use UPnPIGD 1.x to support older Android versions.
         </p>
 
         <div class="note">
-            <div class="title">UpnpIGD on the Android emulator</div>
+            <div class="title">UPnPIGD on the Android emulator</div>
             At the time of writing, receiving UDP Multicast datagrams was not supported by the Android emulator. The
             emulator will send (multicast) UDP datagrams, however. You will be able to send a multicast UPnP search and
             receive UDP unicast responses, therefore discover existing running devices. You will not discover devices
@@ -26,9 +26,9 @@
         </div>
 
         <p>
-            The following examples are based on the UpnpIGD demo applications for Android, the
+            The following examples are based on the UPnPIGD demo applications for Android, the
             <code>cling-demo-android-browser</code> and the <code>cling-demo-android-light</code>, available in the
-            UpnpIGD distribution.
+            UPnPIGD distribution.
         </p>
 
         <div class="section" id="section.Android.ConfiguringService">
@@ -36,14 +36,14 @@
             <div class="content">
 
                 <p>
-                    You could instantiate the UpnpIGD <code>UpnpService</code> as usual in your Android application's
+                    You could instantiate the UPnPIGD <code>UpnpService</code> as usual in your Android application's
                     main activity. On the other hand, if several activities in your application require access to the
                     UPnP stack, a better design would utilize a background <code>android.app.Service</code>. Any
                     activity that wants to access the UPnP stack can then bind and unbind from this service as needed.
                 </p>
 
                 <p>
-                    The interface of such a service component is available in UpnpIGD as
+                    The interface of such a service component is available in UPnPIGD as
                     <code>com.distrimind.upnp_igd.android.AndroidUpnpService</code>:
                 </p>
 
@@ -65,25 +65,25 @@
                    href="file://AndroidManifest.xml"/>
 
                 <p>
-                    If a WiFi interface is present, UpnpIGD requires access to the interface. UpnpIGD will automatically
+                    If a WiFi interface is present, UPnPIGD requires access to the interface. UPnPIGD will automatically
                     detect when network interfaces are switched on and off and handle this situation gracefully: Any
                     client operation will result in a "no response from server" state when no network is available.
                     Your client code has to handle such a situation anyway.
                 </p>
 
                 <p>
-                    UpnpIGD uses a custom configuration on Android, the <code>AndroidUpnpServiceConfiguration</code>,
+                    UPnPIGD uses a custom configuration on Android, the <code>AndroidUpnpServiceConfiguration</code>,
                     utilizing the Jetty transport and the <code>Recovering*</code> XML parsers and processors. See the
                     Javadoc of the class for more information.
                 </p>
 
                 <p>
-                    <em>Jetty 8 libraries are required to use UpnpIGD on Android, see the demo applications for Maven
+                    <em>Jetty 8 libraries are required to use UPnPIGD on Android, see the demo applications for Maven
                         dependencies!</em>
                 </p>
 
                 <p>
-                    For example, these dependencies are usually required in a Maven POM for UpnpIGD to work on Android:
+                    For example, these dependencies are usually required in a Maven POM for UPnPIGD to work on Android:
                 </p>
 
                 <pre><![CDATA[<dependency>
@@ -140,13 +140,13 @@
                     We utilize the default layout provided by the Android runtime and the <code>ListActivity</code>
                     superclass. Note that this activity can be your applications main activity, or further up
                     in the stack of a task. The <code>listAdapter</code> is the glue between the device additions
-                    and removals on the UpnpIGD <code>Registry</code> and the list of items shown in the user interface.
+                    and removals on the UPnPIGD <code>Registry</code> and the list of items shown in the user interface.
                 </p>
 
                 <div class="note">
                     <div class="title">Debug logging on Android</div>
                     <p>
-                        UpnpIGD uses the standard JDK logging, <code>java.util.logging</code>. Unfortunately, by default
+                        UPnPIGD uses the standard JDK logging, <code>java.util.logging</code>. Unfortunately, by default
                         on Android you will not see <code>FINE</code>, <code>FINER</code>, and <code>FINEST</code> log
                         messages, as their built-in log handler is broken (or, so badly designed that it might as well
                         be broken). The easiest workaround is to set a custom log handler available in the
@@ -262,7 +262,7 @@
                 <div class="title">Generating a stable UDN on Android</div>
                 <p>
                     The UDN of a UPnP device is supposed to be stable: It should not change between restarts of the
-                    device. Unfortunately, the UpnpIGD helper method <code>UDN.uniqueSystemIdentifier()</code> doesn't
+                    device. Unfortunately, the UPnPIGD helper method <code>UDN.uniqueSystemIdentifier()</code> doesn't
                     work on Android, see its Javadoc. Generating a new UUID every time your activity starts might
                     be OK for testing, in production you should generate a UUID once when your application starts for
                     the first time and store the UUID value in your application's preferences.
@@ -307,13 +307,13 @@
                 <p>
                     The UPnP service consumes memory and CPU time while it is running. Although this is typically not an
                     issue on a regular machine, this might be a problem on an Android handset. You can preserve memory
-                    and handset battery power if you disable certain features of the UpnpIGD UPnP service, or if you even
+                    and handset battery power if you disable certain features of the UPnPIGD UPnP service, or if you even
                     pause and resume it when appropriate.
                 </p>
 
                 <p>
                     Furthermore, some Android handsets do not support multicast networking (HTC phones, for example), so
-                    you have to configure UpnpIGD accordingly on such a device and disable most of the UPnP discovery
+                    you have to configure UPnPIGD accordingly on such a device and disable most of the UPnP discovery
                     protocol.
                 </p>
 
@@ -410,7 +410,7 @@
                         </p>
 
                         <p>
-                            Discovery messages are selected and potentially dropped by UpnpIGD as soon as the UDP datagram
+                            Discovery messages are selected and potentially dropped by UPnPIGD as soon as the UDP datagram
                             content is available, so no further parsing and processing is needed and CPU time/memory
                             consumption is significantly reduced while you keep the UPnP service running even in the
                             background on an Android handset.

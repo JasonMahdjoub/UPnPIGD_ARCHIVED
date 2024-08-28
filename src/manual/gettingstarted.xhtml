@@ -3,7 +3,7 @@
     <div class="content">
 
         <p>
-            This is how you use UpnpIGD:
+            This is how you use UPnPIGD:
         </p>
 
         <div><pre class="prettyprint"><![CDATA[package ...;
@@ -83,7 +83,7 @@ public class Main {
         };
 
         // This will create necessary network resources for UPnP right away
-        System.out.println("Starting UpnpIGD...");
+        System.out.println("Starting UPnPIGD...");
         UpnpService upnpService = new UpnpServiceImpl(listener);
 
         // Send a search message to all devices and services, they should respond soon
@@ -94,7 +94,7 @@ public class Main {
         Thread.sleep(10000);
 
         // Release all resources and advertise BYEBYE to other UPnP devices
-        System.out.println("Stopping UpnpIGD...");
+        System.out.println("Stopping UPnPIGD...");
         upnpService.shutdown();
     }
 }]]></pre>
