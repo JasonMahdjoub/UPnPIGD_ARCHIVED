@@ -109,7 +109,7 @@ class RemoteItems extends RegistryItems<RemoteDevice, RemoteGENASubscription> {
 			log.fine("Completely hydrated remote device graph available, calling listeners: " + device);
 		}
 		for (final RegistryListener listener : registry.getListeners()) {
-            registry.getConfiguration().getRegistryListenerExecutor().execute(
+            registry.getConfiguration().getRemoteListenerExecutor().execute(
 					() -> listener.remoteDeviceAdded(registry, device)
 			);
         }
@@ -154,7 +154,7 @@ class RemoteItems extends RegistryItems<RemoteDevice, RemoteGENASubscription> {
 				log.fine("Remote device updated, calling listeners: " + registeredRemoteDevice);
 			}
 			for (final RegistryListener listener : registry.getListeners()) {
-                registry.getConfiguration().getRegistryListenerExecutor().execute(
+                registry.getConfiguration().getRemoteListenerExecutor().execute(
 						() -> listener.remoteDeviceUpdated(registry, item.getItem())
 				);
             }
@@ -207,7 +207,7 @@ class RemoteItems extends RegistryItems<RemoteDevice, RemoteGENASubscription> {
 					}
 					it.remove();
                     if (!shuttingDown) {
-                        registry.getConfiguration().getRegistryListenerExecutor().execute(
+                        registry.getConfiguration().getRemoteListenerExecutor().execute(
 								() -> outgoingSubscription.getItem().end(CancelReason.DEVICE_WAS_REMOVED, null)
 						);
                     }
@@ -217,7 +217,7 @@ class RemoteItems extends RegistryItems<RemoteDevice, RemoteGENASubscription> {
             // Only notify listeners if we are NOT in the process of shutting down the registry
             if (!shuttingDown) {
                 for (final RegistryListener listener : registry.getListeners()) {
-                    registry.getConfiguration().getRegistryListenerExecutor().execute(
+                    registry.getConfiguration().getRemoteListenerExecutor().execute(
 							() -> listener.remoteDeviceRemoved(registry, registeredDevice)
 					);
                 }

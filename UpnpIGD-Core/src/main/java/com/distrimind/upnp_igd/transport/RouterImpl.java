@@ -289,7 +289,7 @@ public class RouterImpl implements Router {
             }
             if (log.isLoggable(Level.FINE))
                 log.fine("Received asynchronous message: " + msg);
-            getConfiguration().getAsyncProtocolExecutor().execute(protocol);
+            getConfiguration().getRemoteListenerExecutor().execute(protocol);
         } catch (ProtocolCreationException ex) {
             if (log.isLoggable(Level.WARNING)) log.warning("Handling received datagram failed - " + Exceptions.unwrap(ex).toString());
         }

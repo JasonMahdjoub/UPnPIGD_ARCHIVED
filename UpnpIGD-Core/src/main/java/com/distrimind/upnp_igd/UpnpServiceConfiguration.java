@@ -259,4 +259,8 @@ public interface UpnpServiceConfiguration {
      */
 	void shutdown();
 
+	/**
+	 * @return The executor which runs the remote listener threads.
+	 */
+	Executor getRemoteListenerExecutor();
 }

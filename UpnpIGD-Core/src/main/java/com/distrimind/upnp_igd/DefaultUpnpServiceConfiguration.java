@@ -402,5 +402,8 @@ public class DefaultUpnpServiceConfiguration implements UpnpServiceConfiguration
             return t;
         }
     }
-
+    @Override
+    public Executor getRemoteListenerExecutor() {
+        return getDefaultExecutorService();
+    }
 }
