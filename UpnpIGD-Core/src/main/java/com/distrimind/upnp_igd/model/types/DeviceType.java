@@ -40,6 +40,10 @@ public class DeviceType {
     public static final Pattern PATTERN =
             Pattern.compile("urn:(" + Constants.REGEX_NAMESPACE + "):device:(" + Constants.REGEX_TYPE + "):([0-9]+).*");
 
+    private static final Pattern PATTERN_WHITESPACE = Pattern.compile("\\s");
+    private static final Pattern PATTERN_NAMESPACE = Pattern.compile(Constants.REGEX_NAMESPACE);
+    private static final Pattern PATTERN_TYPE = Pattern.compile(Constants.REGEX_TYPE);
+
     private final String namespace;
     private final String type;
     private final int version;
@@ -49,12 +53,12 @@ public class DeviceType {
     }
 
     public DeviceType(String namespace, String type, int version) {
-        if (namespace != null && !namespace.matches(Constants.REGEX_NAMESPACE)) {
+        if (namespace != null && !PATTERN_NAMESPACE.matcher(namespace).matches()) {
             throw new IllegalArgumentException("Device type namespace contains illegal characters");
         }
         this.namespace = namespace;
 
-        if (type != null && !type.matches(Constants.REGEX_TYPE)) {
+        if (type != null && !PATTERN_TYPE.matcher(type).matches()) {
             throw new IllegalArgumentException("Device type suffix too long (64) or contains illegal characters");
         }
         this.type = type;
@@ -82,7 +86,7 @@ public class DeviceType {
         DeviceType deviceType = null;
 
         // Sometimes crazy UPnP devices deliver spaces in a URN, don't ask...
-        String s = _s==null?null:_s.replaceAll("\\s", "");
+        String s = PATTERN_WHITESPACE.matcher(_s).replaceAll("");
 
         // First try UDADeviceType parse
         try {
