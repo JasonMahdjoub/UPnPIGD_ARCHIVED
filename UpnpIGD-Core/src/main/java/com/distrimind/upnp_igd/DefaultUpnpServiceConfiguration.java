@@ -58,7 +58,7 @@ import java.util.logging.Logger;
  * </p>
  * <p>
  * The thread <code>Executor</code> is an <code>Executors.newCachedThreadPool()</code> with
- * a custom {@link ClingThreadFactory} (it only sets a thread name).
+ * a custom {@link UpnpIGDThreadFactory} (it only sets a thread name).
  * </p>
  * <p>
  * Note that this pool is effectively unlimited, so the number of threads will
@@ -336,13 +336,13 @@ public class DefaultUpnpServiceConfiguration implements UpnpServiceConfiguration
     }
 
     protected ExecutorService createDefaultExecutorService() {
-        return new ClingExecutor();
+        return new UpnpIGDExecutor();
     }
 
-    public static class ClingExecutor extends ThreadPoolExecutor {
+    public static class UpnpIGDExecutor extends ThreadPoolExecutor {
 
-        public ClingExecutor() {
-            this(new ClingThreadFactory(), new ThreadPoolExecutor.DiscardPolicy() {
+        public UpnpIGDExecutor() {
+            this(new UpnpIGDThreadFactory(), new ThreadPoolExecutor.DiscardPolicy() {
                 // The pool is bounded and rejections will happen during shutdown
                 @Override
                 public void rejectedExecution(Runnable runnable, ThreadPoolExecutor threadPoolExecutor) {
@@ -354,7 +354,7 @@ public class DefaultUpnpServiceConfiguration implements UpnpServiceConfiguration
             });
         }
 
-        public ClingExecutor(ThreadFactory threadFactory, RejectedExecutionHandler rejectedHandler) {
+        public UpnpIGDExecutor(ThreadFactory threadFactory, RejectedExecutionHandler rejectedHandler) {
             // This is the same as Executors.newCachedThreadPool
             super(CORE_THREAD_POOL_SIZE, THREAD_POOL_SIZE, 10L, TimeUnit.SECONDS,
                     new ArrayBlockingQueue<>(THREAD_QUEUE_SIZE), threadFactory, rejectedHandler);
@@ -382,13 +382,13 @@ public class DefaultUpnpServiceConfiguration implements UpnpServiceConfiguration
     }
 
     // Executors.DefaultThreadFactory is package visibility (...no touching, you unworthy JDK user!)
-    public static class ClingThreadFactory implements ThreadFactory {
+    public static class UpnpIGDThreadFactory implements ThreadFactory {
 
         protected final ThreadGroup group;
         protected final AtomicInteger threadNumber = new AtomicInteger(1);
         protected final String namePrefix = "cling-";
 
-        public ClingThreadFactory() {
+        public UpnpIGDThreadFactory() {
             group = Thread.currentThread().getThreadGroup();
         }
 
