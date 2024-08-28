@@ -33,7 +33,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.net.InetAddress;
+import java.net.ServerSocket;
 import java.net.URI;
 import java.util.function.Function;
 import java.util.logging.Level;
@@ -46,7 +49,15 @@ abstract public class StreamServerClientTest {
     final private static Logger log = Logger.getLogger(StreamServerClientTest.class.getName());
 
     public static final String TEST_HOST = "localhost";
-    public static final int TEST_PORT = 8081;
+    public static final int TEST_PORT = getAvailablePort();
+
+    private static int getAvailablePort() {
+        try (ServerSocket serverSocket = new ServerSocket(0)) {
+            return serverSocket.getLocalPort();
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
 
     public UpnpServiceConfiguration configuration = new MockUpnpServiceConfiguration(false, true);
 
