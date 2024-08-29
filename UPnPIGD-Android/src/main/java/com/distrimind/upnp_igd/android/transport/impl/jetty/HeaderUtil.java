@@ -15,9 +15,6 @@
  */
 package com.distrimind.upnp_igd.android.transport.impl.jetty;
 
-import java.io.ByteArrayOutputStream;
-import java.nio.ByteBuffer;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 
@@ -27,9 +24,8 @@ import com.distrimind.upnp_igd.http.Headers;
 import com.distrimind.upnp_igd.http.IHeaders;
 import com.distrimind.upnp_igd.model.message.IUpnpHeaders;
 import jakarta.servlet.http.HttpServletResponse;
-import org.eclipse.jetty.client.ByteBufferRequestContent;
-import org.eclipse.jetty.client.Request;
-import org.eclipse.jetty.client.Response;
+import org.eclipse.jetty.client.api.Request;
+import org.eclipse.jetty.client.api.Response;
 import org.eclipse.jetty.http.HttpField;
 import org.eclipse.jetty.http.HttpFields;
 
@@ -76,9 +72,9 @@ public class HeaderUtil {
 	}
 
 	/**
-	 * Get all header information from {@link Response} jUPnP {@link Headers}.
+	 * Get all header information from {@link org.eclipse.jetty.client.api.Response} jUPnP {@link Headers}.
 	 *
-	 * @param response {@link Response}, must not be null
+	 * @param response {@link org.eclipse.jetty.client.api.Response}, must not be null
 	 * @return {@link Headers}, never {@code null}
 	 */
 	public static IHeaders get(final Response response) {
@@ -111,7 +107,7 @@ public class HeaderUtil {
 	 * @param request {@link Request}, must not be null
 	 * @return {@link Headers}, never {@code null}
 	 */
-	public static String getContent(final Request request) {
+	/*public static String getContent(final Request request) {
 		final Request.Content provider = request.getBody();
 
 		final StringBuilder sb = new StringBuilder();
@@ -125,7 +121,7 @@ public class HeaderUtil {
 			}
 		}
 		return sb.toString();
-	}
+	}*/
 
 	/**
 	 * Get all header information from {@link Request} jUPnP {@link Headers}.
@@ -133,7 +129,7 @@ public class HeaderUtil {
 	 * @param request {@link Request}, must not be null
 	 * @return {@link Headers}, never {@code null}
 	 */
-	public static byte[] getBytes(final Request request) {
+	/*public static byte[] getBytes(final Request request) {
 		final Request.Content provider = request.getBody();
 
 		final ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -148,7 +144,7 @@ public class HeaderUtil {
 		}
 
 		return bos.toByteArray();
-	}
+	}*/
 
 	/**
 	 * Get all header information from {@link Request} jUPnP {@link Headers}.

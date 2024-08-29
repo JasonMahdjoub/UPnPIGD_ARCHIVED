@@ -21,17 +21,12 @@ module com.distrimind.upnp_igd.android {
 
 
 	requires static org.eclipse.jetty.client;
-	requires static org.eclipse.jetty.http;
-	requires static org.eclipse.jetty.server;
-	requires static org.eclipse.jetty.ee10.servlet;
-	requires static org.eclipse.jetty.util;
 
 	requires static android;
 
 	requires com.distrimind.upnp_igd;
 	requires java.logging;
-
-
+	requires org.eclipse.jetty.servlet;
 
 
 	exports com.distrimind.upnp_igd.android;

@@ -12,11 +12,10 @@ dependencies {
 
 
     compileOnly 'org.eclipse.jetty:jetty-server:'+jettyVersion
-    compileOnly 'org.eclipse.jetty.ee10:jetty-ee10-servlet:'+jettyVersion
+    compileOnly 'org.eclipse.jetty:jetty-servlet:'+jettyVersion
     compileOnly 'org.eclipse.jetty:jetty-client:'+jettyVersion
 
     compileOnly 'jakarta.enterprise:jakarta.enterprise.cdi-api:'+jakartaCdiAPIVersion
-    //compileOnly 'jakarta.servlet:jakarta.servlet-api:'+jakartaServletVersion
 
 
 
@@ -25,7 +24,7 @@ dependencies {
 
 
     testImplementation 'org.eclipse.jetty:jetty-server:'+jettyVersion
-    testImplementation 'org.eclipse.jetty.ee10:jetty-ee10-servlet:'+jettyVersion
+    testImplementation 'org.eclipse.jetty:jetty-servlet:'+jettyVersion
     testImplementation 'org.eclipse.jetty:jetty-client:'+jettyVersion
 
     testImplementation 'jakarta.enterprise:jakarta.enterprise.cdi-api:'+jakartaCdiAPIVersion

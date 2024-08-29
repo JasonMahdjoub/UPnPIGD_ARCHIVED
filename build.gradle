@@ -43,7 +43,7 @@ group='com.distrimind.upnp_igd'
 
 subprojects {
     ext {
-        jettyVersion='12.0.12'
+        jettyVersion='11.0.23'
         beanShellVersion='2.0b6'
         jsoupVersion='1.18.1'
         jakartaCdiAPIVersion='4.0.1'

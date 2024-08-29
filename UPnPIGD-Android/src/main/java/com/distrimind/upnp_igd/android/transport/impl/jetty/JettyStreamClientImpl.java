@@ -23,10 +23,10 @@ import com.distrimind.upnp_igd.transport.spi.InitializationException;
 import com.distrimind.upnp_igd.transport.spi.StreamClient;
 
 import com.distrimind.upnp_igd.util.SpecificationViolationReporter;
-import org.eclipse.jetty.client.ContentResponse;
+import org.eclipse.jetty.client.api.ContentResponse;
 import org.eclipse.jetty.client.HttpClient;
-import org.eclipse.jetty.client.Request;
-import org.eclipse.jetty.client.StringRequestContent;
+import org.eclipse.jetty.client.api.Request;
+import org.eclipse.jetty.client.util.StringRequestContent;
 import org.eclipse.jetty.http.HttpField;
 import org.eclipse.jetty.http.HttpVersion;
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
