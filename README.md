@@ -1,11 +1,14 @@
+UPnP IGD
+========
+
+[![CodeQL](https://github.com/JasonMahdjoub/UPnPIGD/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/JasonMahdjoub/MaDKitLanEdition/actions/workflows/codeql-analysis.yml)
+
 This is a fork of UPnPIGD, the UPnP stack for Java and Android
 ------------------------------------------------------------
 
-The fork fix some security issues, and upgrade used libraries. Efforts was only made into UPNP IGD part. The project's goals are strict specification compliance, complete, clean and extensive APIs, as well as rich SPIs for easy customization.
+The fork fix some security issues, and upgrade used libraries. Efforts were only made into UPNP IGD part. The project's goals are strict specification compliance, complete, clean and extensive APIs, as well as rich SPIs for easy customization.
 
 UPnPIGD is Free Software, distributed under the terms of the <a href="https://www.gnu.org/licenses/lgpl-2.1.html">GNU Lesser General Public License</a> <b>or at your option</b> the <a href="https://opensource.org/licenses/CDDL-1.0">Common Development and Distribution License</a>.
-
-This repository is mainly implemented for MaDKitLanEdition
 
 How to use it ?
 ---------------
@@ -17,7 +20,7 @@ Adapt into your build.gradle file, the next code :
 	...
 	dependencies {
 		...
-		api(group:'com.distrimind.upnp_igd', name: 'UPnPIGD', version: '1.1.0-STABLE')
+		api(group:'com.distrimind.upnp_igd', name: 'UPnPIGD-Core', version: '1.1.0-STABLE')
 		...
 	}
 	...
@@ -27,11 +30,7 @@ When using UPnPIGD into Android, if you want to use UPnPIGD functions, please us
 	...
 	dependencies {
 		...
-		var jettyVersion='11.0.21'
-        implementation 'jakarta.enterprise:jakarta.enterprise.cdi-api:4.1.0'
-    	implementation 'org.eclipse.jetty:jetty-server:'+jettyVersion
-		implementation 'org.eclipse.jetty:jetty-servlet:'+jettyVersion
-		implementation 'org.eclipse.jetty:jetty-client:'+jettyVersion
+		implementation(group:'com.distrimind.upnp_igd', name: 'UPnPIGD-Android', version: '1.1.0-STABLE')
 		...
 	}
 	...
@@ -59,7 +58,7 @@ Adapt into your pom.xml file, the next code :
 			...
 			<dependency>
 				<groupId>com.distrimind.upnp_igd</groupId>
-				<artifactId>UPnPIGD</artifactId>
+				<artifactId>UPnPIGD-Core</artifactId>
 				<version>1.1.0-STABLE</version>
 			</dependency>
 			...
@@ -72,25 +71,10 @@ When using UPnPIGD into Android, if you want to use UPnPIGD functions, please us
 ```
 	...
     <dependency>
-		<groupId>jakarta.enterprise</groupId>
-		<artifactId>jakarta.enterprise.cdi-api</artifactId>
-		<version>4.1.0</version>
-	</dependency>
-	<dependency>
-		<groupId>org.eclipse.jetty</groupId>
-		<artifactId>jetty-server</artifactId>
-		<version>11.0.21</version>
-	</dependency>
-	<dependency>
-		<groupId>org.eclipse.jetty</groupId>
-		<artifactId>jetty-servlet</artifactId>
-		<version>11.0.21</version>
-	</dependency>
-	<dependency>
-		<groupId>org.eclipse.jetty</groupId>
-		<artifactId>jetty-client</artifactId>
-		<version>11.0.21</version>
-	</dependency>	
+        <groupId>com.distrimind.upnp_igd</groupId>
+        <artifactId>UPnPIGD-Android</artifactId>
+        <version>1.1.0-STABLE</version>
+    </dependency>
 	...
 ```
 Librairies are available on Maven Central. You can check signatures of dependencies with this [public GPG key](key-2023-10-09.pub). You can also use the next repository : 
