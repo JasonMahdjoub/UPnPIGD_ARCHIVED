@@ -25,12 +25,12 @@ Adapt into your build.gradle file, the next code :
 	}
 	...
 ```	
-When using UPnPIGD into Android, if you want to use UPnPIGD functions, please use this additionnal dependencies (minimum Java version is 11) :
+When using UPnPIGD into Android, please use this dependencies instead of the previous dependecy (minimum Java version is 11) :
 ```
 	...
 	dependencies {
 		...
-		implementation(group:'com.distrimind.upnp_igd', name: 'UPnPIGD-Android', version: '1.1.0-STABLE')
+		api(group:'com.distrimind.upnp_igd', name: 'UPnPIGD-Android', version: '1.1.0-STABLE')
 		...
 	}
 	...
@@ -67,7 +67,7 @@ Adapt into your pom.xml file, the next code :
 	</project>
 	...
 ```
-When using UPnPIGD into Android, if you want to use UPnPIGD functions, please use this additionnal dependencies (minimum Java version is 11) :
+When using UPnPIGD into Android, please use this dependencies instead of the previous dependecy (minimum Java version is 11) :
 ```
 	...
     <dependency>
