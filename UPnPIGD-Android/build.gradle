@@ -8,7 +8,7 @@ java {
 
 dependencies {
     implementation project(':UPnPIGD-Core')
-    compileOnly files('FlatLibs/AndroidStub-4.2.0.0.jar')
+    compileOnly files('FlatLibs/AndroidStub-4.3.0.0.jar')
 
 
     compileOnly 'org.eclipse.jetty:jetty-server:'+jettyVersion
